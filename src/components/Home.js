@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+
+  const [heroImage, setHeroImage] = useState(null);
 
   const getTopOneMovieImage = async () => {
     const response = await fetch(
@@ -10,12 +12,21 @@ export default function Home() {
     const dataListing = await response.json();
     const topOneMovie = dataListing.results[0];
     const imagePath = `https://image.tmdb.org/t/p/original/${topOneMovie.backdrop_path}`;
-    console.log(imagePath);
+    setHeroImage(imagePath);
   };
 
   useEffect(() => {
     getTopOneMovieImage();
   }, []);
 
-  return <main></main>;
+  return (
+    <main>
+      <div
+        className="hero w-full h-screen"
+        style={{
+          backgroundImage: `url(${heroImage})`,
+        }}
+      ></div>
+    </main>
+  );
 }

@@ -1,7 +1,7 @@
 export default function NavBar() {
   return (
-    <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-6 w-full">
-      <button>
+    <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-4 w-full">
+      <button className="p-2 text-white hover:bg-stone-800 active:bg-stone-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -20,7 +20,7 @@ export default function NavBar() {
       <h1 className="text-xl font-bold uppercase">Movies</h1>
       <form className="flex flex-1 items-center gap-4">
         <input type="text" className="border-2 flex-1 py-1 px-2" placeholder="Search Movies" />
-        <button>
+        <button className="p-2 hover:bg-stone-800 active:bg-stone-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -38,7 +38,7 @@ export default function NavBar() {
         </button>
       </form>
       <div className="border w-px h-4/5"></div>
-      <button>Sign In</button>
+      <button className="p-2 hover:bg-stone-800 active:bg-stone-700">Sign In</button>
     </nav>
   );
 }

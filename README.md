@@ -37,6 +37,13 @@
 
 ## Add Review Popup
 
+## Navbar
+- Dropdown menu button
+- Logo
+- Search box
+- Vertical bar
+- Sign In button
+
 ## Actor Page (Extra)
 - Image
 - Biography (Short Description)

@@ -22,11 +22,21 @@ export default function Home() {
   return (
     <main>
       <div
-        className="hero w-full h-screen"
+        className="hero w-full h-screen text-white"
         style={{
           backgroundImage: `url(${heroImage})`,
         }}
-      ></div>
+      >
+        <h2>
+          Track films you've watched
+          <br />
+          Save those you want to see
+          <br />
+          Tell your friends what's good
+          <br />
+        </h2>
+        <button className="rounded px-4 py-2 bg-stone-400">Create An Account</button>
+      </div>
     </main>
   );
 }

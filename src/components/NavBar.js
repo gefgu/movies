@@ -19,7 +19,7 @@ export default function NavBar() {
       </button>
       <h1 className="p-2 text-xl font-bold uppercase">Movies</h1>
       <form className="flex flex-1 items-center gap-4">
-        <input type="text" className="border-2 text-black flex-1 py-1 px-2" placeholder="Search Movies" />
+        <input name="search" type="text" className="border-2 text-black flex-1 py-1 px-2" placeholder="Search Movies" />
         <button className="p-2 rounded hover:bg-stone-800 active:bg-stone-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"

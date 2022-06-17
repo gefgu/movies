@@ -9,7 +9,8 @@ export default function Home() {
     );
     const dataListing = await response.json();
     const topOneMovie = dataListing.results[0];
-    console.log(topOneMovie);
+    const imagePath = `https://image.tmdb.org/t/p/original/${topOneMovie.backdrop_path}`;
+    console.log(imagePath);
   };
 
   useEffect(() => {

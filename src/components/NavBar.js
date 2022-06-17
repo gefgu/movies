@@ -1,0 +1,44 @@
+export default function NavBar() {
+  return (
+    <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-6 w-full">
+      <button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+      <h1 className="text-xl">Movies</h1>
+      <form className="flex flex-1 items-center gap-4">
+        <input type="text" className="border-2 flex-1 py-1 px-2" placeholder="Search Movies" />
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
+      </form>
+      <div className="border w-px h-4/5"></div>
+      <button>Sign In</button>
+    </nav>
+  );
+}

@@ -23,6 +23,12 @@ export default function Home() {
   return (
     <main>
       <HeroSection heroImage={heroImage}/>
+      <div className="h-screen bg-stone-900 p-8">
+        <section>
+          <h3 className="text-white">Popular Movies</h3>
+          <hr></hr>
+        </section>
+      </div>
     </main>
   );
 }

@@ -1,12 +1,12 @@
 export default function HeroSection({ heroImage }) {
   return (
     <div
-      className={`w-full min-h-screen bg-cover bg-center bg-no-repeat 
+      className={`w-full h-screen bg-cover bg-center bg-no-repeat 
         text-white flex flex-col justify-end 
         items-center`}
       style={{
         backgroundImage: `
-          linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 100%),
+          linear-gradient(to bottom, #1C191700 0%, #1C191710 50%, #1C1917AA 100%),
           url(${heroImage})`,
       }}
     >

@@ -6,7 +6,7 @@ export default function HeroSection({ heroImage }) {
         items-center`}
       style={{
         backgroundImage: `
-          linear-gradient(to bottom, #1C191700 0%, #1C191710 50%, #1C1917AA 100%),
+          linear-gradient(to bottom, #1C191700 0%, #1C191710 50%, #1C1917FF 100%),
           url(${heroImage})`,
       }}
     >
@@ -20,7 +20,7 @@ export default function HeroSection({ heroImage }) {
         <h2 className="drop-shadow-md text-3xl my-2 font-bold">
           Tell your friends what's good
         </h2>
-        <button className="rounded px-4 py-2 my-4 bg-stone-900 font-bold text-xl hover:bg-stone-800 active:bg-stone-700 drop-shadow-md">
+        <button className="rounded px-4 py-2 my-4 bg-yellow-800 font-bold text-xl hover:bg-yellow-700 active:bg-yellow-600 drop-shadow-md">
           Create An Account
         </button>
       </div>

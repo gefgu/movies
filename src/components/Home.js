@@ -13,12 +13,15 @@ export default function Home() {
     );
     const dataListing = await response.json();
     setPopularMovies(dataListing);
+    console.log(dataListing);
   };
 
   const getTopOneMovieImage = async () => {
-    const topOneMovie = popularMovies.results[0];
-    const imagePath = `https://image.tmdb.org/t/p/original/${topOneMovie.backdrop_path}`;
-    setHeroImage(imagePath);
+    if (popularMovies) {
+      const topOneMovie = popularMovies.results[0];
+      const imagePath = `https://image.tmdb.org/t/p/original/${topOneMovie.backdrop_path}`;
+      setHeroImage(imagePath);
+    }
   };
 
   useEffect(() => {

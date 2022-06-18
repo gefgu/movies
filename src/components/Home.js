@@ -27,21 +27,24 @@ export default function Home() {
         items-center`}
         style={{
           backgroundImage: `
-          linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 100%),
           url(${heroImage})`,
         }}
       >
-        <h2 className="drop-shadow">
-          Track films you've watched
-          <br />
-          Save those you want to see
-          <br />
-          Tell your friends what's good
-          <br />
-        </h2>
-        <button className="rounded px-4 py-2 bg-stone-400">
-          Create An Account
-        </button>
+        <div className="flex flex-col my-14 text-justify">
+          <h2 className="drop-shadow-md text-3xl my-2 font-bold">
+            Track films you've watched
+          </h2>
+          <h2 className="drop-shadow-md text-3xl my-2 font-bold">
+            Save those you want to see
+          </h2>
+          <h2 className="drop-shadow-md text-3xl my-2 font-bold">
+            Tell your friends what's good
+          </h2>
+          <button className="rounded px-4 py-2 my-4 bg-stone-900 font-bold text-xl">
+            Create An Account
+          </button>
+        </div>
       </div>
     </main>
   );

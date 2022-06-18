@@ -22,12 +22,16 @@ export default function Home() {
   return (
     <main>
       <div
-        className="hero w-full h-screen text-white"
+        className={`w-full min-h-screen bg-cover bg-center bg-no-repeat 
+        text-white flex flex-col justify-end 
+        items-center`}
         style={{
-          backgroundImage: `url(${heroImage})`,
+          backgroundImage: `
+          linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%),
+          url(${heroImage})`,
         }}
       >
-        <h2>
+        <h2 className="drop-shadow">
           Track films you've watched
           <br />
           Save those you want to see
@@ -35,7 +39,9 @@ export default function Home() {
           Tell your friends what's good
           <br />
         </h2>
-        <button className="rounded px-4 py-2 bg-stone-400">Create An Account</button>
+        <button className="rounded px-4 py-2 bg-stone-400">
+          Create An Account
+        </button>
       </div>
     </main>
   );

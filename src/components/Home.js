@@ -41,7 +41,7 @@ export default function Home() {
           <h2 className="drop-shadow-md text-3xl my-2 font-bold">
             Tell your friends what's good
           </h2>
-          <button className="rounded px-4 py-2 my-4 bg-stone-900 font-bold text-xl">
+          <button className="rounded px-4 py-2 my-4 bg-stone-900 font-bold text-xl hover:bg-stone-800 active:bg-stone-700">
             Create An Account
           </button>
         </div>

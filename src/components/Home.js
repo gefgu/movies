@@ -6,22 +6,39 @@ export default function Home() {
 
   const [popularMovies, setPopularMovies] = useState(null);
   const [heroImage, setHeroImage] = useState(null);
+  const [popularPosters, setPopularPosters] = useState(null);
 
   const getPopularMovies = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
     );
     const dataListing = await response.json();
-    setPopularMovies(dataListing);
-    console.log(dataListing);
+    setPopularMovies(dataListing.results);
   };
 
-  const getTopOneMovieImage = async () => {
+  const getTopOneMovieImage = () => {
     if (popularMovies) {
-      const topOneMovie = popularMovies.results[0];
+      const topOneMovie = popularMovies[0];
       const imagePath = `https://image.tmdb.org/t/p/original/${topOneMovie.backdrop_path}`;
       setHeroImage(imagePath);
     }
+  };
+
+  const getMoviePoster = async (movie) => {
+    const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${MOVIE_API_KEY}&language=en-US`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return `https://image.tmdb.org/t/p/original/${data.poster_path}`;
+  };
+
+  const getPopularMoviesPosters = async () => {
+    let postersArray = [];
+
+    for (const movie of popularMovies.slice(0, 10)) {
+      const poster = await getMoviePoster(movie);
+      postersArray.push(poster);
+    }
+    setPopularPosters(postersArray);
   };
 
   useEffect(() => {
@@ -29,7 +46,10 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    getTopOneMovieImage();
+    if (popularMovies) {
+      getTopOneMovieImage();
+      getPopularMoviesPosters();
+    }
   }, [popularMovies]);
 
   return (
@@ -39,6 +59,21 @@ export default function Home() {
         <section>
           <h3 className="text-white">Popular Movies</h3>
           <hr></hr>
+          <div className="flex">
+            {popularPosters
+              ? popularPosters.map((path, index) => {
+                  console.log(path);
+                  return (
+                    <img
+                      src={path}
+                      alt="Movie Poster"
+                      key={index}
+                      className="w-96 h-96"
+                    />
+                  );
+                })
+              : ""}
+          </div>
         </section>
       </div>
     </main>

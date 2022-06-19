@@ -1,6 +1,6 @@
 export default function NavBar() {
   return (
-    <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-4 w-full">
+    <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-4 w-full lg:px-64">
       <button className="p-2 rounded text-white hover:bg-stone-800 active:bg-stone-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"

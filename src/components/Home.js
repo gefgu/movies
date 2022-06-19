@@ -53,7 +53,7 @@ export default function Home() {
       <HeroSection
         heroImage={popularMovies && getMovieBackdrop(popularMovies[0])}
       />
-      <div className="bg-stone-900 p-8">
+      <div className="bg-stone-900 p-8 xl:px-64">
         {popularMovies && (
           <PostersListing
             listingTitle="Popular Movies"

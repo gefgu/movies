@@ -10,7 +10,7 @@ export default function HeroSection({ heroImage }) {
           url(${heroImage})`,
       }}
     >
-      <div className="flex flex-col my-14 text-justify">
+      <div className="flex flex-col my-14 text-justify p-4">
         <h2 className="drop-shadow-md text-3xl my-2 font-bold">
           Track films you've watched
         </h2>

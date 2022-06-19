@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import HeroSection from "./HeroSection";
+import PostersListing from "./PostersListing";
 
 export default function Home() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -7,6 +8,8 @@ export default function Home() {
   const [popularMovies, setPopularMovies] = useState(null);
   const [heroImage, setHeroImage] = useState(null);
   const [popularPosters, setPopularPosters] = useState(null);
+
+  const moviesInDisplay = 6;
 
   const getPopularMovies = async () => {
     const response = await fetch(
@@ -34,7 +37,7 @@ export default function Home() {
   const getPopularMoviesPosters = async () => {
     let postersArray = [];
 
-    for (const movie of popularMovies.slice(0, 10)) {
+    for (const movie of popularMovies.slice(0, moviesInDisplay)) {
       const poster = await getMoviePoster(movie);
       postersArray.push(poster);
     }
@@ -58,22 +61,8 @@ export default function Home() {
       <div className="h-screen bg-stone-900 p-8">
         <section>
           <h3 className="text-white">Popular Movies</h3>
-          <hr></hr>
-          <div className="flex">
-            {popularPosters
-              ? popularPosters.map((path, index) => {
-                  console.log(path);
-                  return (
-                    <img
-                      src={path}
-                      alt="Movie Poster"
-                      key={index}
-                      className="w-96 h-96"
-                    />
-                  );
-                })
-              : ""}
-          </div>
+          <hr className="my-2" />
+          {popularPosters && <PostersListing posters={popularPosters} />}
         </section>
       </div>
     </main>

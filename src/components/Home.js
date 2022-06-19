@@ -54,30 +54,18 @@ export default function Home() {
         heroImage={popularMovies && getMovieBackdrop(popularMovies[0])}
       />
       <div className="bg-stone-900 p-8">
-        <section>
-          <h3 className="text-white text-xl">Popular Movies</h3>
-          <hr className="my-2" />
-          {popularMovies && (
-            <PostersListing
-              posters={getMoviesPosters(popularMovies).slice(
-                0,
-                moviesInDisplay
-              )}
-            />
-          )}
-        </section>
-        <section>
-          <h3 className="text-white text-xl">Top Rated Movies</h3>
-          <hr className="my-2" />
-          {topRatedMovies && (
-            <PostersListing
-              posters={getMoviesPosters(topRatedMovies).slice(
-                0,
-                moviesInDisplay
-              )}
-            />
-          )}
-        </section>
+        {popularMovies && (
+          <PostersListing
+            listingTitle="Popular Movies"
+            posters={getMoviesPosters(popularMovies).slice(0, moviesInDisplay)}
+          />
+        )}
+        {topRatedMovies && (
+          <PostersListing
+            listingTitle="Popular Movies"
+            posters={getMoviesPosters(topRatedMovies).slice(0, moviesInDisplay)}
+          />
+        )}
       </div>
     </main>
   );

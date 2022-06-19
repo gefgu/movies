@@ -60,7 +60,7 @@ export default function Home() {
       <HeroSection heroImage={heroImage} />
       <div className="bg-stone-900 p-8">
         <section>
-          <h3 className="text-white">Popular Movies</h3>
+          <h3 className="text-white text-xl">Popular Movies</h3>
           <hr className="my-2" />
           {popularPosters && <PostersListing posters={popularPosters} />}
         </section>

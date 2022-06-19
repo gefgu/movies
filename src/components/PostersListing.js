@@ -1,13 +1,13 @@
 export default function PostersListing({ posters }) {
   return (
-    <article>
+    <article className="flex flex-wrap gap-8 justify-center md:justify-between">
       {posters.map((path, index) => {
         return (
           <img
             src={path}
             alt="Movie Poster"
             key={index}
-            className="flex-initial"
+            className="max-h-96"
           />
         );
       })}

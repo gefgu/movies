@@ -62,7 +62,7 @@ export default function Home() {
         )}
         {topRatedMovies && (
           <PostersListing
-            listingTitle="Popular Movies"
+            listingTitle="Top Rated Movies"
             posters={getMoviesPosters(topRatedMovies).slice(0, moviesInDisplay)}
           />
         )}

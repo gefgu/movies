@@ -6,6 +6,7 @@ export default function Home() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
   const [popularMovies, setPopularMovies] = useState(null);
+  const [topRatedMovies, setTopRatedMovies] = useState(null);
   const [heroImage, setHeroImage] = useState(null);
   const [popularPosters, setPopularPosters] = useState(null);
 
@@ -17,6 +18,14 @@ export default function Home() {
     );
     const dataListing = await response.json();
     setPopularMovies(dataListing.results);
+  };
+
+  const getTopRatedMovies = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
+    );
+    const dataListing = await response.json();
+    setTopRatedMovies(dataListing.results);
   };
 
   const getTopOneMovieImage = () => {
@@ -46,6 +55,7 @@ export default function Home() {
 
   useEffect(() => {
     getPopularMovies();
+    getTopRatedMovies();
   }, []);
 
   useEffect(() => {

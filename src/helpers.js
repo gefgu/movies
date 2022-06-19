@@ -15,4 +15,15 @@ const getMoviesPosters = (movies) => {
   return postersArray;
 };
 
-export { getMovieBackdrop, getMoviePoster, getMoviesPosters };
+const convertMinutesIntoHoursAndMinutes = (minutes) => {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes - hours * 60;
+  return { hours: hours, minutes: remainingMinutes };
+};
+
+export {
+  getMovieBackdrop,
+  getMoviePoster,
+  getMoviesPosters,
+  convertMinutesIntoHoursAndMinutes,
+};

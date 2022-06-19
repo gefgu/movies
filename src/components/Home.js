@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import HeroSection from "./HeroSection";
 import PostersListing from "./PostersListing";
+import { getMovieBackdrop, getMoviesPosters } from "../helpers";
 
 export default function Home() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -24,23 +25,6 @@ export default function Home() {
     );
     const dataListing = await response.json();
     setTopRatedMovies(dataListing.results);
-  };
-
-  const getMovieBackdrop = (movie) => {
-    const imagePath = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
-    return imagePath;
-  };
-
-  const getMoviePoster = (movie) => {
-    return `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
-  };
-
-  const getMoviesPosters = (movies) => {
-    const postersArray = movies.map((movie) => {
-      return getMoviePoster(movie);
-    });
-
-    return postersArray;
   };
 
   useEffect(() => {

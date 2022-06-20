@@ -104,26 +104,8 @@ export default function MoviePage() {
             <p>{movieDetails.overview}</p>
           </div>
         </section>
-        {movieImages && (
-          <section className="my-8 mx-4 xl:px-64 2xl:px-96">
-            <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
-              Photos
-            </h3>
-            <div className="flex overflow-scroll gap-4 my-4">
-              {movieImages.backdrops.slice(0, 12).map((image) => (
-                <div className="shrink-0">
-                  <img
-                    src={getMovieBackdrop(image.file_path)}
-                    alt="Movie"
-                    className="w-96 h-96 object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
         {movieVideos && (
-          <section className="my-8 mx-4 xl:px-64 2xl:px-96">
+          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               Videos
             </h3>
@@ -137,6 +119,24 @@ export default function MoviePage() {
                   title="video"
                   className="flex-shrink-0 w-full max-w-xl min-h-[360px]"
                 />
+              ))}
+            </div>
+          </section>
+        )}
+        {movieImages && (
+          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
+            <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
+              Photos
+            </h3>
+            <div className="flex overflow-scroll gap-4 my-4">
+              {movieImages.backdrops.slice(0, 12).map((image) => (
+                <div className="shrink-0">
+                  <img
+                    src={getMovieBackdrop(image.file_path)}
+                    alt="Movie"
+                    className="w-96 h-96 object-cover"
+                  />
+                </div>
               ))}
             </div>
           </section>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
+import PostersListing from "./PostersListing";
 
 export default function MoviePage() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -11,6 +12,7 @@ export default function MoviePage() {
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
+  const [similarMovies, setSimilarMovies] = useState(null);
 
   const getMovieDetails = async () => {
     const response = await fetch(
@@ -42,8 +44,17 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${MOVIE_API_KEY}`
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setMovieCast(data.cast);
+  };
+
+  const getSimilarMovies = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
+    );
+    const data = await response.json();
+    console.log(data.results);
+    setSimilarMovies(data.results);
   };
 
   const getMovieTrailers = (movieVideos) => {
@@ -54,9 +65,10 @@ export default function MoviePage() {
 
   useEffect(() => {
     getMovieDetails();
+    getMovieVideos();
     getMovieImages();
     getMovieCast();
-    getMovieVideos();
+    getSimilarMovies();
   }, []);
 
   return (
@@ -172,7 +184,14 @@ export default function MoviePage() {
             </div>
           </section>
         )}
-        {/* More like this section */}
+        {similarMovies && (
+          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
+            <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
+              More like this
+            </h3>
+            {/* Add movies here */}
+          </section>
+        )}
         {/* User Reviews Section */}
       </>
     )

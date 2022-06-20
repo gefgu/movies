@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  getMoviePoster,
   convertMinutesIntoHoursAndMinutes,
-  getMovieBackdrop,
+  getTMDBImage,
 } from "../helpers";
 
 export default function MoviePage() {
@@ -81,7 +80,7 @@ export default function MoviePage() {
           </div>
           <div className="py-8 flex flex-wrap justify-center md:justify-between md:flex-nowrap gap-8">
             <img
-              src={getMoviePoster(movieDetails)}
+              src={getTMDBImage(movieDetails.poster_path)}
               alt="Movie Poster"
               className="max-w-xs"
             />
@@ -142,7 +141,7 @@ export default function MoviePage() {
               {movieImages.backdrops.slice(0, 12).map((image) => (
                 <div className="shrink-0">
                   <img
-                    src={getMovieBackdrop(image.file_path)}
+                    src={getTMDBImage(image.file_path)}
                     alt="Movie"
                     className="w-96 h-96 object-cover"
                   />

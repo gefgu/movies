@@ -1,15 +1,11 @@
-const getMovieBackdrop = (backdrop_path) => {
-  const imagePath = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
+const getTMDBImage = (path) => {
+  const imagePath = `https://image.tmdb.org/t/p/original/${path}`;
   return imagePath;
-};
-
-const getMoviePoster = (movie) => {
-  return `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
 };
 
 const getMoviesPosters = (movies) => {
   const postersArray = movies.map((movie) => {
-    return getMoviePoster(movie);
+    return getTMDBImage(movie.poster_path);
   });
 
   return postersArray;
@@ -21,9 +17,4 @@ const convertMinutesIntoHoursAndMinutes = (minutes) => {
   return { hours: hours, minutes: remainingMinutes };
 };
 
-export {
-  getMovieBackdrop,
-  getMoviePoster,
-  getMoviesPosters,
-  convertMinutesIntoHoursAndMinutes,
-};
+export { getTMDBImage, getMoviesPosters, convertMinutesIntoHoursAndMinutes };

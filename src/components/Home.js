@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HeroSection from "./HeroSection";
 import PostersListing from "./PostersListing";
-import { getMovieBackdrop, getMoviesPosters } from "../helpers";
+import { getTMDBImage, getMoviesPosters } from "../helpers";
 
 export default function Home() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -17,6 +17,7 @@ export default function Home() {
     );
     const dataListing = await response.json();
     setPopularMovies(dataListing.results);
+    console.log(dataListing.results);
   };
 
   const getTopRatedMovies = async () => {
@@ -35,7 +36,9 @@ export default function Home() {
   return (
     <main>
       <HeroSection
-        heroImage={popularMovies && getMovieBackdrop(popularMovies[0].backdrop_path)}
+        heroImage={
+          popularMovies && getTMDBImage(popularMovies[0].backdrop_path)
+        }
       />
       <div className="bg-stone-900 p-8 xl:px-64 2xl:px-96">
         {popularMovies && (

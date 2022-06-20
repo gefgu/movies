@@ -1,5 +1,5 @@
-const getMovieBackdrop = (movie) => {
-  const imagePath = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
+const getMovieBackdrop = (backdrop_path) => {
+  const imagePath = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
   return imagePath;
 };
 

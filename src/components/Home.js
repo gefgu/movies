@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <main>
       <HeroSection
-        heroImage={popularMovies && getMovieBackdrop(popularMovies[0])}
+        heroImage={popularMovies && getMovieBackdrop(popularMovies[0].backdrop_path)}
       />
       <div className="bg-stone-900 p-8 xl:px-64 2xl:px-96">
         {popularMovies && (

@@ -28,7 +28,7 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    setMovieVideos(data.results);
+    if (data.results.length > 0) setMovieVideos(data.results);
   };
 
   const getMovieImages = async () => {
@@ -53,7 +53,7 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
     );
     const data = await response.json();
-    console.log(data.results);
+    // console.log(data.results);
     setSimilarMovies(data.results.slice(0, 6));
   };
 

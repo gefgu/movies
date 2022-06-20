@@ -24,15 +24,13 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    // console.log(data.results);
-    const onlyTrailers = data.results.filter((video) =>
-      video.name.toLowerCase().includes("trailer")
+    setMovieVideos(data.results);
+  };
+
+  const getMovieTrailers = (movieVideos) => {
+    return movieVideos.filter(
+      (video) => video.type.toLowerCase() === "trailer"
     );
-    if (onlyTrailers.length > 0) {
-      setMovieVideos(onlyTrailers);
-    } else {
-      setMovieVideos(data.results);
-    }
   };
 
   useEffect(() => {
@@ -64,7 +62,9 @@ export default function MoviePage() {
             />
             {movieVideos && (
               <iframe
-                src={`https://www.youtube.com/embed/${movieVideos[0].key}`}
+                src={`https://www.youtube.com/embed/${
+                  getMovieTrailers(movieVideos)[0].key
+                }`}
                 frameBorder="0"
                 allow="autoplay; encrypted-media"
                 allowFullScreen

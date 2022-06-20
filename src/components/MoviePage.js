@@ -9,13 +9,14 @@ export default function MoviePage() {
 
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieVideos, setMovieVideos] = useState(null);
+  const [movieImages, setMovieImages] = useState(null);
 
   const getMovieDetails = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setMovieDetails(data);
   };
 
@@ -27,6 +28,15 @@ export default function MoviePage() {
     setMovieVideos(data.results);
   };
 
+  const getMovieImages = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${MOVIE_API_KEY}`
+    );
+    const data = await response.json();
+    console.log(data);
+    setMovieImages(data);
+  };
+
   const getMovieTrailers = (movieVideos) => {
     return movieVideos.filter(
       (video) => video.type.toLowerCase() === "trailer"
@@ -36,6 +46,7 @@ export default function MoviePage() {
   useEffect(() => {
     getMovieDetails();
     getMovieVideos();
+    getMovieImages();
   }, []);
 
   return (
@@ -76,7 +87,10 @@ export default function MoviePage() {
           <div className="text-white flex flex-wrap gap-4">
             {movieDetails.genres.map((genre) => {
               return (
-                <span className="border-2 px-4 py-2 rounded-full">
+                <span
+                  className="border-2 px-4 py-2 rounded-full"
+                  key={genre.name}
+                >
                   {genre.name}
                 </span>
               );
@@ -86,6 +100,11 @@ export default function MoviePage() {
             <p>{movieDetails.overview}</p>
           </div>
         </section>
+        <div>
+          <section>
+            <h3>Photos</h3>
+          </section>
+        </div>
       </>
     )
   );

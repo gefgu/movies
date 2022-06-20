@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
-import PostersListing from "./PostersListing";
+import MoviesList from "./MoviesList";
 
 export default function MoviePage() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -54,7 +54,7 @@ export default function MoviePage() {
     );
     const data = await response.json();
     console.log(data.results);
-    setSimilarMovies(data.results);
+    setSimilarMovies(data.results.slice(0, 6));
   };
 
   const getMovieTrailers = (movieVideos) => {
@@ -189,7 +189,7 @@ export default function MoviePage() {
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               More like this
             </h3>
-            {/* Add movies here */}
+            <MoviesList movies={similarMovies} />
           </section>
         )}
         {/* User Reviews Section */}

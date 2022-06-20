@@ -42,7 +42,7 @@ export default function MoviePage() {
 
   return (
     movieDetails && (
-      <section className="p-4 bg-stone-800 text-white xl:px-64">
+      <section className="p-4 bg-stone-800 text-white xl:px-64 2xl:px-96">
         <h2 className="text-3xl font-bold mt-8 mb-2">
           {movieDetails.original_title}
         </h2>

@@ -55,7 +55,7 @@ export default function MoviePage() {
             convertMinutesIntoHoursAndMinutes(movieDetails.runtime).minutes
           }m`}</span>
         </div>
-        <div className="py-8 flex gap-8">
+        <div className="py-8 flex flex-wrap justify-center md:justify-between md:flex-nowrap gap-8">
           <img
             src={getMoviePoster(movieDetails)}
             alt="Movie Poster"

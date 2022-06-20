@@ -72,8 +72,10 @@ export default function MoviePage() {
             />
           )}
         </div>
-        <div>
-
+        <div className="text-white flex gap-4">
+          {movieDetails.genres.map((genre) => {
+            return <span className="border-2 px-4 py-2 rounded-full">{genre.name}</span>;
+          })}
         </div>
       </section>
     )

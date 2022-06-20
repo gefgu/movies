@@ -25,7 +25,14 @@ export default function MoviePage() {
     );
     const data = await response.json();
     console.log(data.results);
-    setMovieVideos(data.results);
+    const onlyTrailers = data.results.filter((video) =>
+      video.name.toLowerCase().includes("trailer")
+    );
+    if (onlyTrailers.length > 0) {
+      setMovieVideos(onlyTrailers);
+    } else {
+      setMovieVideos(data.results);
+    }
   };
 
   useEffect(() => {
@@ -52,7 +59,7 @@ export default function MoviePage() {
           <img
             src={getMoviePoster(movieDetails)}
             alt="Movie Poster"
-            className="max-h-96"
+            className="max-w-xs"
           />
           {movieVideos && (
             <iframe

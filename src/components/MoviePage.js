@@ -152,10 +152,18 @@ export default function MoviePage() {
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               Top Cast
             </h3>
-            <div className="flex flex-wrap gap-8 my-4 w-full justify-around">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-4 w-full justify-between">
               {movieCast.slice(0, 14).map((person) => (
-                <section>
-                  <img src={getTMDBImage(person.profile_path)} alt="profile" className="h-60 w-48 object-cover rounded-full" />
+                <section className="flex items-center">
+                  <img
+                    src={getTMDBImage(person.profile_path)}
+                    alt="profile"
+                    className="h-32 w-28 object-cover rounded-full"
+                  />
+                  <div className="flex flex-col mx-4">
+                    <h4 className="text-2xl my-2 font-bold">{person.name}</h4>
+                    <h5 className="text-gray-800">{person.character}</h5>
+                  </div>
                 </section>
               ))}
             </div>

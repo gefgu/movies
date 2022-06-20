@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  convertMinutesIntoHoursAndMinutes,
-  getTMDBImage,
-} from "../helpers";
+import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
 
 export default function MoviePage() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -146,6 +143,20 @@ export default function MoviePage() {
                     className="w-96 h-96 object-cover"
                   />
                 </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {movieCast && (
+          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
+            <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
+              Top Cast
+            </h3>
+            <div className="flex flex-wrap gap-8 my-4 w-full justify-around">
+              {movieCast.slice(0, 14).map((person) => (
+                <section>
+                  <img src={getTMDBImage(person.profile_path)} alt="profile" className="h-60 w-48 object-cover rounded-full" />
+                </section>
               ))}
             </div>
           </section>

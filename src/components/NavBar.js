@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function NavBar() {
   return (
     <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-4 w-full lg:px-64">
@@ -17,9 +19,14 @@ export default function NavBar() {
           />
         </svg>
       </button>
-      <h1 className="p-2 text-xl font-bold uppercase">Movies</h1>
+      <Link to="/"><h1 className="p-2 text-xl font-bold uppercase">Movies</h1></Link>
       <form className="flex flex-1 items-center gap-4 justify-center">
-        <input name="search" type="text" className="border-2 text-black flex-1 py-1 px-2 hidden sm:block" placeholder="Search Movies" />
+        <input
+          name="search"
+          type="text"
+          className="border-2 text-black flex-1 py-1 px-2 hidden sm:block"
+          placeholder="Search Movies"
+        />
         <button className="p-2 rounded hover:bg-stone-800 active:bg-stone-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +45,9 @@ export default function NavBar() {
         </button>
       </form>
       <div className="border w-px h-4/5"></div>
-      <button className="p-2 rounded hover:bg-stone-800 active:bg-stone-700">Sign In</button>
+      <button className="p-2 rounded hover:bg-stone-800 active:bg-stone-700">
+        Sign In
+      </button>
     </nav>
   );
 }

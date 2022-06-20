@@ -44,13 +44,13 @@ export default function Home() {
         {popularMovies && (
           <PostersListing
             listingTitle="Popular Movies"
-            posters={getMoviesPosters(popularMovies).slice(0, moviesInDisplay)}
+            movies={popularMovies.slice(0, moviesInDisplay)}
           />
         )}
         {topRatedMovies && (
           <PostersListing
             listingTitle="Top Rated Movies"
-            posters={getMoviesPosters(topRatedMovies).slice(0, moviesInDisplay)}
+            movies={topRatedMovies.slice(0, moviesInDisplay)}
           />
         )}
       </div>

@@ -169,6 +169,8 @@ export default function MoviePage() {
             </div>
           </section>
         )}
+        {/* More like this section */}
+        {/* User Reviews Section */}
       </>
     )
   );

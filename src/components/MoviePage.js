@@ -29,6 +29,7 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
+    console.log(data.results);
     setMovieVideos(data.results);
   };
 
@@ -37,7 +38,6 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${MOVIE_API_KEY}`
     );
     const data = await response.json();
-    console.log(data);
     setMovieImages(data);
   };
 
@@ -118,6 +118,25 @@ export default function MoviePage() {
                     className="w-96 h-96 object-cover"
                   />
                 </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {movieVideos && (
+          <section className="my-8 mx-4 xl:px-64 2xl:px-96">
+            <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
+              Videos
+            </h3>
+            <div className="flex overflow-scroll gap-4 my-4 w-full">
+              {movieVideos.slice(0, 4).map((video) => (
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  title="video"
+                  className="flex-shrink-0 w-full max-w-xl min-h-[360px]"
+                />
               ))}
             </div>
           </section>

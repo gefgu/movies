@@ -24,7 +24,7 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    console.log(data.results);
+    // console.log(data.results);
     const onlyTrailers = data.results.filter((video) =>
       video.name.toLowerCase().includes("trailer")
     );
@@ -64,13 +64,16 @@ export default function MoviePage() {
           {movieVideos && (
             <iframe
               src={`https://www.youtube.com/embed/${movieVideos[0].key}`}
-              frameborder="0"
+              frameBorder="0"
               allow="autoplay; encrypted-media"
-              allowfullscreen
+              allowFullScreen
               title="video"
               className="w-full max-w-3xl"
             />
           )}
+        </div>
+        <div>
+
         </div>
       </section>
     )

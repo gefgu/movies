@@ -100,11 +100,10 @@ export default function MoviePage() {
             <p>{movieDetails.overview}</p>
           </div>
         </section>
-        <div>
-          <section>
-            <h3>Photos</h3>
-          </section>
-        </div>
+
+        <section>
+          <h3 className="text-3xl border-l-4 m-4 p-2 border-yellow-400">Photos</h3>
+        </section>
       </>
     )
   );

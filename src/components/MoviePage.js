@@ -14,6 +14,7 @@ export default function MoviePage() {
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
+  const [movieCast, setMovieCast] = useState(null);
 
   const getMovieDetails = async () => {
     const response = await fetch(
@@ -29,7 +30,6 @@ export default function MoviePage() {
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    console.log(data.results);
     setMovieVideos(data.results);
   };
 
@@ -41,6 +41,15 @@ export default function MoviePage() {
     setMovieImages(data);
   };
 
+  const getMovieCast = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${MOVIE_API_KEY}`
+    );
+    const data = await response.json();
+    console.log(data);
+    setMovieCast(data.cast);
+  };
+
   const getMovieTrailers = (movieVideos) => {
     return movieVideos.filter(
       (video) => video.type.toLowerCase() === "trailer"
@@ -49,8 +58,9 @@ export default function MoviePage() {
 
   useEffect(() => {
     getMovieDetails();
-    getMovieVideos();
     getMovieImages();
+    getMovieCast();
+    getMovieVideos();
   }, []);
 
   return (

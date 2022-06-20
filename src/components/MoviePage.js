@@ -68,11 +68,11 @@ export default function MoviePage() {
               allow="autoplay; encrypted-media"
               allowFullScreen
               title="video"
-              className="w-full max-w-3xl"
+              className="w-full max-w-3xl min-h-[480px]"
             />
           )}
         </div>
-        <div className="text-white flex gap-4">
+        <div className="text-white flex flex-wrap gap-4">
           {movieDetails.genres.map((genre) => {
             return <span className="border-2 px-4 py-2 rounded-full">{genre.name}</span>;
           })}

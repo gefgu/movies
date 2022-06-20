@@ -110,12 +110,12 @@ export default function MoviePage() {
               Photos
             </h3>
             <div className="flex overflow-scroll gap-4 my-4">
-              {movieImages.posters.slice(0, 12).map((image) => (
+              {movieImages.backdrops.slice(0, 12).map((image) => (
                 <div className="shrink-0">
                   <img
                     src={getMovieBackdrop(image.file_path)}
                     alt="Movie"
-                    className="max-w-xs"
+                    className="w-96 h-96 object-cover"
                   />
                 </div>
               ))}

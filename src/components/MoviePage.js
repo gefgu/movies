@@ -66,7 +66,7 @@ export default function MoviePage() {
     getMovieImages();
     getMovieCast();
     getSimilarMovies();
-    
+
     return () => {
       setMovieDetails(null);
       setMovieVideos(null);
@@ -133,7 +133,6 @@ export default function MoviePage() {
                   getMovieTrailers(movieVideos)[0].key
                 }`}
                 frameBorder="0"
-                allow="autoplay; encrypted-media"
                 allowFullScreen
                 title="video"
                 className="w-full max-w-3xl min-h-[480px]"
@@ -166,7 +165,6 @@ export default function MoviePage() {
                 <iframe
                   src={`https://www.youtube.com/embed/${video.key}`}
                   frameBorder="0"
-                  allow="autoplay; encrypted-media"
                   allowFullScreen
                   title="video"
                   className="flex-shrink-0 w-full max-w-xl min-h-[360px]"

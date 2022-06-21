@@ -5,9 +5,7 @@ import NavBar from "./components/NavBar";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
 
-
 function App() {
-
   const app = initializeApp(firebaseConfig);
 
   return (

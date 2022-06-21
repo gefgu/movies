@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export default function NavBar() {
+    const signIn = async () => {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(getAuth(), provider);
+  };
+
   return (
     <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-4 w-full xl:px-64 2xl:px-96">
       <button className="p-2 rounded text-white hover:bg-stone-800 active:bg-stone-700">
@@ -19,7 +25,9 @@ export default function NavBar() {
           />
         </svg>
       </button>
-      <Link to="/"><h1 className="p-2 text-xl font-bold uppercase">Movies</h1></Link>
+      <Link to="/">
+        <h1 className="p-2 text-xl font-bold uppercase">Movies</h1>
+      </Link>
       <form className="flex flex-1 items-center gap-4 justify-center">
         <input
           name="search"
@@ -45,7 +53,10 @@ export default function NavBar() {
         </button>
       </form>
       <div className="border w-px h-4/5"></div>
-      <button className="p-2 rounded hover:bg-stone-800 active:bg-stone-700">
+      <button
+        className="p-2 rounded hover:bg-stone-800 active:bg-stone-700"
+        onClick={signIn}
+      >
         Sign In
       </button>
     </nav>

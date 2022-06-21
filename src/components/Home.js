@@ -17,7 +17,6 @@ export default function Home() {
     );
     const dataListing = await response.json();
     setPopularMovies(dataListing.results);
-    console.log(dataListing.results);
   };
 
   const getTopRatedMovies = async () => {

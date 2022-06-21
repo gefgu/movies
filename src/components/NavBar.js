@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-export default function NavBar() {
-    const signIn = async () => {
+export default function NavBar({ setAuthState }) {
+  const signIn = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
+    const auth = getAuth();
+    setAuthState(auth);
   };
 
   return (

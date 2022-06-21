@@ -123,11 +123,11 @@ export default function MoviePage() {
           </div>
         </section>
         {movieVideos && (
-          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
-            <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
+          <section className="my-16 mx-4 xl:px-64 2xl:px-96">
+            <h3 className="text-3xl border-l-4 p-2 border-yellow-400">
               Videos
             </h3>
-            <div className="flex overflow-scroll gap-4 my-4 w-full">
+            <div className="flex overflow-scroll gap-4 my-8 w-full">
               {movieVideos.slice(0, 4).map((video) => (
                 <iframe
                   src={`https://www.youtube.com/embed/${video.key}`}
@@ -142,11 +142,11 @@ export default function MoviePage() {
           </section>
         )}
         {movieImages && (
-          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
+          <section className="my-16 mx-4 xl:px-64 2xl:px-96">
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               Photos
             </h3>
-            <div className="flex overflow-scroll gap-4 my-4">
+            <div className="flex overflow-scroll gap-4 my-8">
               {movieImages.backdrops.slice(0, 12).map((image) => (
                 <div className="shrink-0">
                   <img
@@ -160,11 +160,11 @@ export default function MoviePage() {
           </section>
         )}
         {movieCast && (
-          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
+          <section className="my-16 mx-4 xl:px-64 2xl:px-96">
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               Top Cast
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-4 w-full justify-between">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8 w-full justify-between">
               {movieCast.slice(0, 14).map((person) => {
                 if (!person.profile_path) return "";
                 return (
@@ -185,8 +185,8 @@ export default function MoviePage() {
           </section>
         )}
         {similarMovies && (
-          <section className="my-12 mx-4 xl:px-64 2xl:px-96">
-            <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
+          <section className="my-16 mx-4 xl:px-64 2xl:px-96">
+            <h3 className="text-3xl border-l-4 p-2 border-yellow-400 my-8">
               More like this
             </h3>
             <MoviesList movies={similarMovies} />

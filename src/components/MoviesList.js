@@ -6,8 +6,8 @@ export default function MoviesList({ movies }) {
     <article className="flex flex-wrap xl:flex-nowrap gap-8 justify-center md:justify-between my-4">
       {movies.map((movie, index) => {
         return (
-          <Link to={`/movie/${movies[index].id}`}>
-            <div className="flex-intial xl:flex-1" key={index}>
+          <Link to={`/movie/${movies[index].id}`} key={index}>
+            <div className="flex-intial xl:flex-1">
               <img
                 src={getTMDBImage(movie.poster_path)}
                 alt="Movie Poster"

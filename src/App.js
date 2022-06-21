@@ -9,11 +9,15 @@ import { getAuth } from "firebase/auth";
 
 function App() {
   const app = initializeApp(firebaseConfig);
-  const [authState, setAuthState] = useState(getAuth());
+  const [currentUser, setCurrentUser] = useState(getAuth().currentUser);
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   return (
     <BrowserRouter>
-      <NavBar setAuthState={setAuthState} />
+      <NavBar setUser={setCurrentUser} user={currentUser} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:movieId" element={<MoviePage />} />

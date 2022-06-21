@@ -66,7 +66,15 @@ export default function MoviePage() {
     getMovieImages();
     getMovieCast();
     getSimilarMovies();
-  }, []);
+    
+    return () => {
+      setMovieDetails(null);
+      setMovieVideos(null);
+      setMovieImages(null);
+      setMovieCast(null);
+      setSimilarMovies(null);
+    };
+  }, [movieId]);
 
   const reviews = [
     {

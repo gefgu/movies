@@ -224,10 +224,10 @@ export default function MoviePage() {
           </h3>
           {reviews.map((review) => {
             return (
-              <section>
-                <h4>{review.title}</h4>
-                <div>⭐ {review.stars}/10</div>
-                <p>{review.content}</p>
+              <section className="my-6 rounded-lg p-4 shadow-md border">
+                <h4 className="text-xl font-bold my-4">{review.title}</h4>
+                <div className="my-4">⭐ {review.stars}/10</div>
+                <p className="my-4 text-justify">{review.content}</p>
                 <p>
                   {review.author} • {review.date}
                 </p>

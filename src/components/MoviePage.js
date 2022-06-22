@@ -267,13 +267,19 @@ export default function MoviePage({ signInUser, user }) {
                 className="h-52"
               />
               <div className="px-4 flex flex-col">
-                <h3 className="text-2xl font-bold mt-8 mb-2">
+                <h3 className="text-xl font-bold mt-8 mb-2">
                   {movieDetails.original_title}
                 </h3>
                 <hr />
-                <h3 className="text-4xl mt-auto">Add a Review</h3>
+                <h4 className="text-3xl mt-auto">Add a Review</h4>
               </div>
             </div>
+            <form>
+              <section className="py-6 border-b-2">
+                <h5 className="text-xl mb-4">Your Rating</h5>
+                <input className="text-black" type="number" min="0" max="10" placeholder="stars" />
+              </section>
+            </form>
           </section>
         </div>
       </>

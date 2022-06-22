@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
@@ -14,6 +15,7 @@ export default function MoviePage({ signInUser, user }) {
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
+  const [displayReviewPopup, setDisplayReviewPopup] = useState(false);
 
   const getMovieDetails = async () => {
     const response = await fetch(
@@ -106,13 +108,12 @@ export default function MoviePage({ signInUser, user }) {
     },
   ];
 
-  const addReview = () => {
+  const addReview = async () => {
     console.log(user);
     if (!user) {
-      signInUser();
-      return;
+      await signInUser();
     }
-    console.log(user.displayName);
+    setDisplayReviewPopup(true);
   };
 
   return (
@@ -259,7 +260,7 @@ export default function MoviePage({ signInUser, user }) {
             );
           })}
         </section>
-        <ReviewPopup movieDetails={movieDetails} />
+        {displayReviewPopup && <ReviewPopup movieDetails={movieDetails} />}
       </>
     )
   );

@@ -225,9 +225,14 @@ export default function MoviePage() {
           </section>
         )}
         <section className="my-16 mx-4 xl:px-64 2xl:px-96">
-          <h3 className="text-3xl border-l-4 p-2 border-yellow-400 my-8">
-            User Reviews
-          </h3>
+          <div className="flex justify-between items-center">
+            <h3 className="text-3xl border-l-4 p-2 border-yellow-400 my-8">
+              User Reviews
+            </h3>
+            <button className="mx-2 text-xl hover:bg-stone-200 active:bg-stone-300 p-4 h-fit">
+              + Review
+            </button>
+          </div>
           {reviews.map((review) => {
             return (
               <section className="my-6 rounded-lg p-4 shadow-md border">

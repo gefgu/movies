@@ -275,9 +275,29 @@ export default function MoviePage({ signInUser, user }) {
               </div>
             </div>
             <form>
-              <section className="py-6 border-b-2">
-                <h5 className="text-xl mb-4">Your Rating</h5>
-                <input className="text-black" type="number" min="0" max="10" placeholder="stars" />
+              <section className="py-6 border-b-2 flex flex-col gap-6">
+                <h5 className="text-xl">Your Rating</h5>
+                <input
+                  className="text-black p-1"
+                  type="number"
+                  min="0"
+                  max="10"
+                  placeholder="stars"
+                />
+              </section>
+              <section className="py-6 border-b-2 flex flex-col gap-6">
+                <h5 className="text-xl">Your Review</h5>
+                <input
+                  className="text-black py-1 px-2 w-full"
+                  type="text"
+                  placeholder="Write a headline for your review here"
+                />
+                <textarea
+                  className="text-black py-1 px-2 w-full"
+                  type="textarea"
+                  placeholder="Write your review here"
+                  rows="12"
+                ></textarea>
               </section>
             </form>
           </section>

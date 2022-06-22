@@ -260,17 +260,17 @@ export default function MoviePage({ signInUser, user }) {
         </section>
         <div className="bg-stone-100/50 fixed z-10 top-0 left-0 flex justify-center items-center w-full h-full overflow-scroll">
           <section className="bg-stone-900 max-w-5xl py-4 px-8 text-white flex-1">
-            <div className="flex border-b-2 py-6">
+            <div className="flex border-b-2 my-6 items-center">
               <img
                 src={getTMDBImage(movieDetails.poster_path)}
                 alt="Movie Poster"
                 className="h-36"
               />
               <div className="px-4 flex flex-col">
-                <h3 className="text-xl font-bold mt-8 mb-2">
+                <h3 className="text-xl font-bold  mb-2">
                   {movieDetails.original_title}
                 </h3>
-                <hr />
+                <hr className="mb-8" />
                 <h4 className="text-3xl mt-auto">Add a Review</h4>
               </div>
             </div>

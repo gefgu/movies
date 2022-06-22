@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
 import MoviesList from "./MoviesList";
 
-export default function MoviePage() {
+export default function MoviePage({ signInUser, user }) {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
   const { movieId } = useParams();
   // 338953 - Fantastic Beasts 3 id
@@ -104,6 +104,15 @@ export default function MoviePage() {
       content: `I never knew there was mist in the 4DK experience that was added excitement to a wildly entertaining movie! Sonic 2 is better, bigger budgeted and way more action than part 1. This is an ultimate adventure story of friendship, goofiness, and the bad guys take it up a notch. I loved this sequel quite a bit, I like how the audience clapped at the end bit.`,
     },
   ];
+
+  const addReview = () => {
+    console.log(user);
+    if (!user) {
+      signInUser();
+      return;
+    }
+    console.log(user.displayName);
+  };
 
   return (
     movieDetails && (
@@ -229,7 +238,10 @@ export default function MoviePage() {
             <h3 className="text-3xl border-l-4 p-2 border-yellow-400 my-8">
               User Reviews
             </h3>
-            <button className="mx-2 text-xl hover:bg-stone-200 active:bg-stone-300 p-4 h-fit">
+            <button
+              onClick={addReview}
+              className="mx-2 text-xl hover:bg-stone-200 active:bg-stone-300 p-4 h-fit"
+            >
               + Review
             </button>
           </div>

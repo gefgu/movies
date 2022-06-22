@@ -4,7 +4,7 @@ import MoviePage from "./components/MoviePage";
 import NavBar from "./components/NavBar";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -30,6 +30,10 @@ function App() {
     setCurrentUser(auth.currentUser);
   };
 
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
+
   return (
     <BrowserRouter>
       <NavBar
@@ -42,7 +46,10 @@ function App() {
           path="/"
           element={<Home user={currentUser} signInUser={signInUser} />}
         />
-        <Route path="/movie/:movieId" element={<MoviePage />} />
+        <Route
+          path="/movie/:movieId"
+          element={<MoviePage signInUser={signInUser} user={currentUser} />}
+        />
       </Routes>
     </BrowserRouter>
   );

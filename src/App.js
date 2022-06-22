@@ -38,7 +38,10 @@ function App() {
         signOutUser={signOutUser}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home user={currentUser} signInUser={signInUser} />}
+        />
         <Route path="/movie/:movieId" element={<MoviePage />} />
       </Routes>
     </BrowserRouter>

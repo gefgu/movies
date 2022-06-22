@@ -3,7 +3,7 @@ import HeroSection from "./HeroSection";
 import PostersListing from "./PostersListing";
 import { getTMDBImage } from "../helpers";
 
-export default function Home() {
+export default function Home({ user, signInUser }) {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
   const [popularMovies, setPopularMovies] = useState(null);
@@ -38,6 +38,8 @@ export default function Home() {
         heroImage={
           popularMovies && getTMDBImage(popularMovies[0].backdrop_path)
         }
+        user={user}
+        signInUser={signInUser}
       />
       <div className="bg-stone-900 p-8 xl:px-64 2xl:px-96">
         {popularMovies && (

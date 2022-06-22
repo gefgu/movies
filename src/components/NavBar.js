@@ -1,20 +1,6 @@
 import { Link } from "react-router-dom";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
 
-export default function NavBar({ setUser, user }) {
-  const signIn = async () => {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(getAuth(), provider);
-    const auth = getAuth();
-    console.log(auth);
-    setUser(auth.currentUser);
-  };
-
+export default function NavBar({ signInUser, signOutUser, user }) {
   return (
     <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-2 sm:gap-4 w-full xl:px-64 2xl:px-96">
       <button className="p-2 rounded text-white hover:bg-stone-800 active:bg-stone-700">
@@ -66,11 +52,7 @@ export default function NavBar({ setUser, user }) {
           {user.displayName}
           <button
             className="p-2 rounded hover:bg-stone-800 active:bg-stone-700 mx-2"
-            onClick={async () => {
-              await signOut(getAuth());
-              const auth = getAuth();
-              setUser(auth.currentUser);
-            }}
+            onClick={signOutUser}
           >
             Sign Out
           </button>
@@ -78,7 +60,7 @@ export default function NavBar({ setUser, user }) {
       ) : (
         <button
           className="p-2 rounded hover:bg-stone-800 active:bg-stone-700"
-          onClick={signIn}
+          onClick={signInUser}
         >
           Sign In
         </button>

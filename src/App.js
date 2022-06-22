@@ -4,20 +4,39 @@ import MoviePage from "./components/MoviePage";
 import NavBar from "./components/NavBar";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
-import { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
+import { useState } from "react";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 function App() {
   const app = initializeApp(firebaseConfig);
   const [currentUser, setCurrentUser] = useState(getAuth().currentUser);
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  const signInUser = async () => {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(getAuth(), provider);
+    const auth = getAuth();
+    console.log(auth);
+    setCurrentUser(auth.currentUser);
+  };
+
+  const signOutUser = async () => {
+    await signOut(getAuth());
+    const auth = getAuth();
+    setCurrentUser(auth.currentUser);
+  };
 
   return (
     <BrowserRouter>
-      <NavBar setUser={setCurrentUser} user={currentUser} />
+      <NavBar
+        user={currentUser}
+        signInUser={signInUser}
+        signOutUser={signOutUser}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:movieId" element={<MoviePage />} />

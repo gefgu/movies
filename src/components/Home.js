@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HeroSection from "./HeroSection";
 import PostersListing from "./PostersListing";
-import { getTMDBImage, getMoviesPosters } from "../helpers";
+import { getTMDBImage } from "../helpers";
 
 export default function Home() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;

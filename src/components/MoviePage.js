@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
@@ -82,7 +81,7 @@ export default function MoviePage({ signInUser, user }) {
   const reviews = [
     {
       author: "User 1",
-      stars: 7,
+      rating: 7,
       date: "9 April 2022",
       title: "Much more of a Sonic movie this time",
       content: `The first Sonic movie was surprisingly competent. This one is even better, incorporating additional elements from the games and sticking to more of an action-adventure plot. It's a kid's movie through and through (way more toilet humor this go-around), but a fun one that never takes itself too seriously. Everyone in my theater was having a great time with it.
@@ -91,7 +90,7 @@ export default function MoviePage({ signInUser, user }) {
     },
     {
       author: "User 2",
-      stars: 7,
+      rating: 7,
       date: "6 April 2022",
       title: "Fun. What more do you want? ",
       content: `Following Dr Robotnik's exile, Sonic has settled down in rural Montana with adoptive parents Sheriff Tom and wife Maddie. What follows includes Robotnik's escape, the arrival of additional alien oddities Miles "Tails" Prower, the twin-tailed fox and Knuckles, the aggressive echidna, a marriage in Hawaii, a dance-off in Siberia, mushroom machinery, a Master Emerald, some annoying military intervention, and a giant robot.
@@ -100,7 +99,7 @@ export default function MoviePage({ signInUser, user }) {
     },
     {
       author: "User 3",
-      stars: 7,
+      rating: 7,
       date: "7 April 2022",
       title:
         "Saw the 4DX early showing which was more intense than expected and so much fun!",
@@ -255,7 +254,7 @@ export default function MoviePage({ signInUser, user }) {
             return (
               <section className="my-6 rounded-lg p-4 shadow-md border">
                 <h4 className="text-xl font-bold my-4">{review.title}</h4>
-                <div className="my-4">⭐ {review.stars}/10</div>
+                <div className="my-4">⭐ {review.rating}/10</div>
                 <p className="my-4 text-justify">{review.content}</p>
                 <p>
                   {review.author} • {review.date}
@@ -268,6 +267,7 @@ export default function MoviePage({ signInUser, user }) {
           <ReviewPopup
             movieDetails={movieDetails}
             removePopup={removeReviewPopup}
+            user={user}
           />
         )}
       </>

@@ -116,6 +116,10 @@ export default function MoviePage({ signInUser, user }) {
     setDisplayReviewPopup(true);
   };
 
+  const removeReviewPopup = () => {
+    setDisplayReviewPopup(false);
+  };
+
   return (
     movieDetails && (
       <>
@@ -260,7 +264,12 @@ export default function MoviePage({ signInUser, user }) {
             );
           })}
         </section>
-        {displayReviewPopup && <ReviewPopup movieDetails={movieDetails} />}
+        {displayReviewPopup && (
+          <ReviewPopup
+            movieDetails={movieDetails}
+            removePopup={removeReviewPopup}
+          />
+        )}
       </>
     )
   );

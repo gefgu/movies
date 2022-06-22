@@ -1,6 +1,6 @@
 import { getTMDBImage } from "../helpers";
 
-export default function ReviewPopup({ movieDetails }) {
+export default function ReviewPopup({ movieDetails, removePopup }) {
   return (
     <div className="bg-stone-100/50 fixed z-10 top-0 left-0 flex justify-center items-center w-full h-full overflow-scroll">
       <section className="bg-stone-900 max-w-5xl py-4 px-8 text-white flex-1">
@@ -44,7 +44,10 @@ export default function ReviewPopup({ movieDetails }) {
             ></textarea>
           </section>
           <div className="flex gap-6 justify-end my-6">
-            <button className="bg-red-600 hover:bg-red-700 active:bg-red-800 py-2 px-4 rounded font-bold">
+            <button
+              className="bg-red-600 hover:bg-red-700 active:bg-red-800 py-2 px-4 rounded font-bold"
+              onClick={removePopup}
+            >
               Cancel
             </button>
             <button className="bg-yellow-600 hover:bg-yellow-700 active:bg-yellow-800 py-2 px-4 rounded font-bold">

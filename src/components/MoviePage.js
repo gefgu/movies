@@ -67,13 +67,13 @@ export default function MoviePage({ signInUser, user }) {
     getMovieCast();
     getSimilarMovies();
 
-    return () => {
-      setMovieDetails(null);
-      setMovieVideos(null);
-      setMovieImages(null);
-      setMovieCast(null);
-      setSimilarMovies(null);
-    };
+    // return () => {
+    //   setMovieDetails(null);
+    //   setMovieVideos(null);
+    //   setMovieImages(null);
+    //   setMovieCast(null);
+    //   setSimilarMovies(null);
+    // };
   }, [movieId]);
 
   const reviews = [
@@ -258,6 +258,24 @@ export default function MoviePage({ signInUser, user }) {
             );
           })}
         </section>
+        <div className="bg-stone-100/50 fixed z-10 top-0 left-0 flex justify-center items-center w-full h-full">
+          <section className="bg-stone-900 max-w-5xl p-8 text-white flex-1">
+            <div className="flex border-b-2 py-2">
+              <img
+                src={getTMDBImage(movieDetails.poster_path)}
+                alt="Movie Poster"
+                className="h-52"
+              />
+              <div className="px-4 flex flex-col">
+                <h3 className="text-2xl font-bold mt-8 mb-2">
+                  {movieDetails.original_title}
+                </h3>
+                <hr />
+                <h3 className="text-4xl mt-auto">Add a Review</h3>
+              </div>
+            </div>
+          </section>
+        </div>
       </>
     )
   );

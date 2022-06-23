@@ -1,12 +1,21 @@
 import { useState, useRef } from "react";
 import { getTMDBImage } from "../helpers";
-import { format } from 'date-fns'
+import { format } from "date-fns";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 export default function ReviewPopup({ movieDetails, removePopup, user }) {
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const formRef = useRef(null);
+
+  const saveReview = async (review) => {
+    try {
+      await addDoc(collection(getFirestore(), "reviews"), review);
+    } catch (error) {
+      console.error("Error while saving review", error);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +31,8 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
       };
 
       console.log(review);
+      saveReview(review);
+      removePopup();
     }
   };
 

@@ -11,6 +11,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import SearchPage from "./SearchPage";
 
 function App() {
   const app = initializeApp(firebaseConfig);
@@ -50,6 +51,7 @@ function App() {
           path="/movie/:movieId"
           element={<MoviePage signInUser={signInUser} user={currentUser} />}
         />
+        <Route path="/search:query" element={<SearchPage />} />
       </Routes>
     </BrowserRouter>
   );

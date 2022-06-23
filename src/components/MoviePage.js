@@ -65,16 +65,20 @@ export default function MoviePage({ signInUser, user }) {
   };
 
   const getReviews = async () => {
-    const reviewsQuery = query(collection(getFirestore(), "reviews"));
+    try {
+      const reviewsQuery = query(collection(getFirestore(), "reviews"));
 
-    const reviewsSnapshot = await getDocs(reviewsQuery);
-    let newReviews = [];
-    reviewsSnapshot.forEach((review) => {
-      if (`${review.data().movie}` === `${movieId}`) {
-        newReviews.push(review.data());
-      }
-    });
-    setReviews(newReviews);
+      const reviewsSnapshot = await getDocs(reviewsQuery);
+      let newReviews = [];
+      reviewsSnapshot.forEach((review) => {
+        if (`${review.data().movie}` === `${movieId}`) {
+          newReviews.push(review.data());
+        }
+      });
+      setReviews(newReviews);
+    } catch (error) {
+      console.error("Error trying to ge reviews", error);
+    }
   };
 
   useEffect(() => {

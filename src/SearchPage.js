@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { getTMDBImage } from "./helpers";
 
 export default function SearchPage() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -25,7 +26,28 @@ export default function SearchPage() {
     return () => {
       setSearchResults(null);
     };
-  }, []);
+  }, [searchQuery]);
 
-  return <div>{searchQuery}</div>;
+  return (
+    <section className="p-8 xl:px-64 2xl:px-96">
+      <h2 className="text-2xl mb-8 border-b-2">Results for "{searchQuery}"</h2>
+      <div className="grid grid-cols-1 gap-16">
+        {searchResults &&
+          searchResults.map((searchResult) => (
+            <section className="flex gap-8">
+              <img
+                src={getTMDBImage(searchResult.poster_path)}
+                alt="Movie Poster"
+                className="h-56"
+              />
+
+              <div>
+                <h3 className="text-xl my-2">{searchResult.title}</h3>
+                <p>{searchResult.overview}</p>
+              </div>
+            </section>
+          ))}
+      </div>
+    </section>
+  );
 }

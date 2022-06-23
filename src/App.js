@@ -51,7 +51,7 @@ function App() {
           path="/movie/:movieId"
           element={<MoviePage signInUser={signInUser} user={currentUser} />}
         />
-        <Route path="/search/:query" element={<SearchPage />} />
+        <Route path="/search/:searchQuery" element={<SearchPage />} />
       </Routes>
     </BrowserRouter>
   );

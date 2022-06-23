@@ -1,3 +1,10 @@
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
@@ -15,6 +22,7 @@ export default function MoviePage({ signInUser, user }) {
   const [movieCast, setMovieCast] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
   const [displayReviewPopup, setDisplayReviewPopup] = useState(false);
+  const [reviews, setReviews] = useState(null);
 
   const getMovieDetails = async () => {
     const response = await fetch(
@@ -62,12 +70,26 @@ export default function MoviePage({ signInUser, user }) {
     );
   };
 
+  const getReviews = async () => {
+    const reviewsQuery = query(collection(getFirestore(), "reviews"));
+
+    const reviewsSnapshot = await getDocs(reviewsQuery);
+    let newReviews = [];
+    reviewsSnapshot.forEach((review) => {
+      if (`${review.data().movie}` === `${movieId}`) {
+        newReviews.push(review.data());
+      }
+    });
+    setReviews(newReviews);
+  };
+
   useEffect(() => {
     getMovieDetails();
     getMovieVideos();
     getMovieImages();
     getMovieCast();
     getSimilarMovies();
+    getReviews();
 
     // return () => {
     //   setMovieDetails(null);
@@ -77,35 +99,6 @@ export default function MoviePage({ signInUser, user }) {
     //   setSimilarMovies(null);
     // };
   }, [movieId]);
-
-  const reviews = [
-    {
-      author: "User 1",
-      rating: 7,
-      date: "9 April 2022",
-      title: "Much more of a Sonic movie this time",
-      content: `The first Sonic movie was surprisingly competent. This one is even better, incorporating additional elements from the games and sticking to more of an action-adventure plot. It's a kid's movie through and through (way more toilet humor this go-around), but a fun one that never takes itself too seriously. Everyone in my theater was having a great time with it.
-
-    As with the original, Jim Carrey steals the show as Eggman. This man is 60 years old and yet he has more verve than I do! He's so energetic he sometimes resembles a cartoon more than Sonic, Knuckles, or Tails! While I respect his desire to retire, I do hope he holds on and does the third movie-- there would be such a void without him there.`,
-    },
-    {
-      author: "User 2",
-      rating: 7,
-      date: "6 April 2022",
-      title: "Fun. What more do you want? ",
-      content: `Following Dr Robotnik's exile, Sonic has settled down in rural Montana with adoptive parents Sheriff Tom and wife Maddie. What follows includes Robotnik's escape, the arrival of additional alien oddities Miles "Tails" Prower, the twin-tailed fox and Knuckles, the aggressive echidna, a marriage in Hawaii, a dance-off in Siberia, mushroom machinery, a Master Emerald, some annoying military intervention, and a giant robot.
-
-      That sounds like a lot, but it's pretty straightforward stuff in a plot which aims directly at a 3-part audience - kids, tolerant parents, and mature gamers with fond memories of the original games. And I think it succeeds. It's brash, colourful, fast, eventful, funny, likeable, and has some pretty good visuals.`,
-    },
-    {
-      author: "User 3",
-      rating: 7,
-      date: "7 April 2022",
-      title:
-        "Saw the 4DX early showing which was more intense than expected and so much fun!",
-      content: `I never knew there was mist in the 4DK experience that was added excitement to a wildly entertaining movie! Sonic 2 is better, bigger budgeted and way more action than part 1. This is an ultimate adventure story of friendship, goofiness, and the bad guys take it up a notch. I loved this sequel quite a bit, I like how the audience clapped at the end bit.`,
-    },
-  ];
 
   const addReview = async () => {
     console.log(user);
@@ -238,31 +231,33 @@ export default function MoviePage({ signInUser, user }) {
             <MoviesList movies={similarMovies} />
           </section>
         )}
-        <section className="my-16 mx-4 xl:px-64 2xl:px-96">
-          <div className="flex justify-between items-center">
-            <h3 className="text-3xl border-l-4 p-2 border-yellow-400 my-8">
-              User Reviews
-            </h3>
-            <button
-              onClick={addReview}
-              className="mx-2 text-xl hover:bg-stone-200 active:bg-stone-300 p-4 h-fit"
-            >
-              + Review
-            </button>
-          </div>
-          {reviews.map((review) => {
-            return (
-              <section className="my-6 rounded-lg p-4 shadow-md border">
-                <h4 className="text-xl font-bold my-4">{review.title}</h4>
-                <div className="my-4">⭐ {review.rating}/10</div>
-                <p className="my-4 text-justify">{review.content}</p>
-                <p>
-                  {review.author} • {review.date}
-                </p>
-              </section>
-            );
-          })}
-        </section>
+        {reviews && (
+          <section className="my-16 mx-4 xl:px-64 2xl:px-96">
+            <div className="flex justify-between items-center">
+              <h3 className="text-3xl border-l-4 p-2 border-yellow-400 my-8">
+                User Reviews
+              </h3>
+              <button
+                onClick={addReview}
+                className="mx-2 text-xl hover:bg-stone-200 active:bg-stone-300 p-4 h-fit"
+              >
+                + Review
+              </button>
+            </div>
+            {reviews.map((review) => {
+              return (
+                <section className="my-6 rounded-lg p-4 shadow-md border">
+                  <h4 className="text-xl font-bold my-4">{review.title}</h4>
+                  <div className="my-4">⭐ {review.rating}/10</div>
+                  <p className="my-4 text-justify">{review.content}</p>
+                  <p>
+                    {review.author} • {review.date}
+                  </p>
+                </section>
+              );
+            })}
+          </section>
+        )}
         {displayReviewPopup && (
           <ReviewPopup
             movieDetails={movieDetails}

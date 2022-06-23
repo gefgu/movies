@@ -1,10 +1,4 @@
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
@@ -110,6 +104,7 @@ export default function MoviePage({ signInUser, user }) {
 
   const removeReviewPopup = () => {
     setDisplayReviewPopup(false);
+    getReviews();
   };
 
   return (

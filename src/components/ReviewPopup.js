@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { getTMDBImage } from "../helpers";
 import { format } from "date-fns";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import starOutline from "../assets/star-outline.png";
 
 export default function ReviewPopup({ movieDetails, removePopup, user }) {
   const [rating, setRating] = useState(0);
@@ -15,6 +16,10 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
     } catch (error) {
       console.error("Error while saving review", error);
     }
+  };
+
+  const addRating = (rating) => {
+    setRating(rating);
   };
 
   const handleSubmit = (e) => {
@@ -56,16 +61,11 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
         <form ref={formRef}>
           <section className="my-6 flex flex-col gap-6">
             <h5 className="text-xl">Your Rating</h5>
-            <input
-              className="text-black p-1"
-              type="number"
-              min="0"
-              max="10"
-              placeholder="stars"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-              required
-            />
+            <div className="bg-white flex">
+              {Array.from(Array(10).keys()).map((value) => {
+                return <img src={starOutline} alt="star"  className="w-12"/>;
+              })}
+            </div>
           </section>
           <section className="my-6 flex flex-col gap-6">
             <h5 className="text-xl">Your Review</h5>

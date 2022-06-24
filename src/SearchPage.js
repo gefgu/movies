@@ -36,7 +36,7 @@ export default function SearchPage() {
         {searchResults ? (
           searchResults.map((searchResult) => (
             <section
-              className="grid grid-cols-[200px_1fr] gap-8"
+              className="grid grid-cols-[200px_1fr] sm:gap-2 md:gap-8"
               key={searchResult.id}
             >
               <Link to={`../movie/${searchResult.id}`}>

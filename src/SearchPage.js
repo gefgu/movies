@@ -35,7 +35,10 @@ export default function SearchPage() {
       <div className="grid grid-cols-1 gap-16">
         {searchResults &&
           searchResults.map((searchResult) => (
-            <section className="grid grid-cols-[200px_1fr] gap-8" key={searchResult.id}>
+            <section
+              className="grid grid-cols-[200px_1fr] gap-8"
+              key={searchResult.id}
+            >
               <Link to={`../movie/${searchResult.id}`}>
                 <img
                   src={getTMDBImage(searchResult.poster_path)}
@@ -45,7 +48,9 @@ export default function SearchPage() {
               </Link>
 
               <div>
-                <h3 className="text-xl my-2">{searchResult.title}</h3>
+                <Link to={`../movie/${searchResult.id}`}>
+                  <h3 className="text-xl my-2 hover:text-yellow-800 active:text-yellow-700">{searchResult.title}</h3>
+                </Link>
                 <p>{searchResult.overview}</p>
               </div>
             </section>

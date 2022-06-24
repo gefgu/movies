@@ -18,7 +18,7 @@ export default function SearchPage() {
     const data = await response.json();
     const results = data.results.filter((result) => result.poster_path);
     console.log(results);
-    setSearchResults(results);
+    if (results.length > 0) setSearchResults(results);
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function SearchPage() {
     <section className="p-8 xl:px-64 2xl:px-96">
       <h2 className="text-2xl mb-8 border-b-2">Results for "{searchQuery}"</h2>
       <div className="grid grid-cols-1 gap-16">
-        {searchResults &&
+        {searchResults ? (
           searchResults.map((searchResult) => (
             <section
               className="grid grid-cols-[200px_1fr] gap-8"
@@ -49,12 +49,17 @@ export default function SearchPage() {
 
               <div>
                 <Link to={`../movie/${searchResult.id}`}>
-                  <h3 className="text-xl my-2 hover:text-yellow-800 active:text-yellow-700">{searchResult.title}</h3>
+                  <h3 className="text-xl my-2 hover:text-yellow-800 active:text-yellow-700">
+                    {searchResult.title}
+                  </h3>
                 </Link>
                 <p>{searchResult.overview}</p>
               </div>
             </section>
-          ))}
+          ))
+        ) : (
+          <p className="text-xl">No Results Found.</p>
+        )}
       </div>
     </section>
   );

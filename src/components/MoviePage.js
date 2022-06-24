@@ -174,6 +174,7 @@ export default function MoviePage({ signInUser, user }) {
                   allowFullScreen
                   title="video"
                   className="flex-shrink-0 w-full max-w-xl min-h-[360px]"
+                  key={video.key}
                 />
               ))}
             </div>
@@ -190,7 +191,7 @@ export default function MoviePage({ signInUser, user }) {
                   <img
                     src={getTMDBImage(image.file_path)}
                     alt="Movie"
-                    className="w-96 h-96 object-cover"
+                    className="h-96"
                   />
                 </div>
               ))}

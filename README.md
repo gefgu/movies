@@ -1,7 +1,5 @@
 # To-Dos
 
-## Search Bar in Mobile
-
 ## Image Carousel
 
 ## Video Carousel

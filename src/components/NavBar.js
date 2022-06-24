@@ -46,14 +46,18 @@ export default function NavBar({ signInUser, signOutUser, user }) {
       </form>
       <div className="border w-px h-4/5"></div>
       {user ? (
-        <div className="flex items-center">
-          {user.displayName}
-          <button
-            className="p-2 rounded hover:bg-stone-800 active:bg-stone-700 mx-2"
-            onClick={signOutUser}
-          >
-            Sign Out
+        <div className="flex items-center relative">
+          <button className="hover:bg-stone-800 active:bg-stone-700 p-2 rounded">
+            {user.displayName}
           </button>
+          <div className="absolute top-10 left-0 flex justify-center py-2 w-full bg-stone-900 z-20">
+            <button
+              className="p-2 text-md rounded hover:bg-stone-800 active:bg-stone-700"
+              onClick={signOutUser}
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
       ) : (
         <button

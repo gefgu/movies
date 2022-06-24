@@ -62,21 +62,24 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
         <form ref={formRef}>
           <section className="my-6 flex flex-col gap-6">
             <h5 className="text-xl">Your Rating</h5>
-            <div className="bg-white flex flex-wrap">
-              {Array.from(Array(10).keys()).map((value) => {
-                let source = starOutline;
-                if (value + 1 <= rating) {
-                  source = star;
-                }
-                return (
-                  <img
-                    src={source}
-                    alt="star"
-                    className="w-12"
-                    onClick={() => addRating(value + 1)}
-                  />
-                );
-              })}
+            <div className="bg-white flex flex-wrap items-center justify-center sm:justify-start gap-4 p-2">
+              <div className="flex flex-wrap">
+                {Array.from(Array(10).keys()).map((value) => {
+                  let source = starOutline;
+                  if (value + 1 <= rating) {
+                    source = star;
+                  }
+                  return (
+                    <img
+                      src={source}
+                      alt="star"
+                      className="w-12"
+                      onClick={() => addRating(value + 1)}
+                    />
+                  );
+                })}
+              </div>
+              <span className="text-black text-xl">{rating}/10</span>
             </div>
           </section>
           <section className="my-6 flex flex-col gap-6">

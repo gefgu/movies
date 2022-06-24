@@ -16,8 +16,9 @@ export default function SearchPage() {
       )}&page=1&include_adult=false`
     );
     const data = await response.json();
-    console.log(data.results);
-    setSearchResults(data.results);
+    const results = data.results.filter((result) => result.poster_path)
+    console.log(results);
+    setSearchResults(results);
   };
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function SearchPage() {
       <div className="grid grid-cols-1 gap-16">
         {searchResults &&
           searchResults.map((searchResult) => (
-            <section className="flex gap-8">
+            <section className="flex gap-8" key={searchResult.id}>
               <img
                 src={getTMDBImage(searchResult.poster_path)}
                 alt="Movie Poster"

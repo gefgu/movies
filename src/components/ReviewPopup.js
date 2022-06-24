@@ -7,6 +7,7 @@ import star from "../assets/star.png";
 
 export default function ReviewPopup({ movieDetails, removePopup, user }) {
   const [rating, setRating] = useState(0);
+  const [displayRating, setDisplayRating] = useState(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const formRef = useRef(null);
@@ -66,7 +67,10 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
               <div className="flex flex-wrap">
                 {Array.from(Array(10).keys()).map((value) => {
                   let source = starOutline;
-                  if (value + 1 <= rating) {
+                  if (!displayRating && value + 1 <= rating) {
+                    source = star;
+                  }
+                  if (value + 1 <= displayRating) {
                     source = star;
                   }
                   return (
@@ -75,11 +79,15 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
                       alt="star"
                       className="w-12"
                       onClick={() => addRating(value + 1)}
+                      onMouseEnter={() => setDisplayRating(value + 1)}
+                      onMouseLeave={() => setDisplayRating(null)}
                     />
                   );
                 })}
               </div>
-              <span className="text-black text-xl">{rating}/10</span>
+              <span className="text-black text-xl">
+                {displayRating ? displayRating : rating}/10
+              </span>
             </div>
           </section>
           <section className="my-6 flex flex-col gap-6">

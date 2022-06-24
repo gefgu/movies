@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import triangle from "../assets/triangle-small-down.png";
 
 export default function NavBar({ signInUser, signOutUser, user }) {
   const navigate = useNavigate();
   const searchBar = useRef();
+
+  const [showDropDown, setShowDropDown] = useState(false);
 
   const search = (e) => {
     e.preventDefault();
@@ -48,18 +50,23 @@ export default function NavBar({ signInUser, signOutUser, user }) {
       <div className="border w-px h-4/5"></div>
       {user ? (
         <div className="flex items-center relative">
-          <button className="hover:bg-stone-800 active:bg-stone-700 p-2 rounded flex items-center">
+          <button
+            className="hover:bg-stone-800 active:bg-stone-700 p-2 rounded flex items-center"
+            onClick={() => setShowDropDown(!showDropDown)}
+          >
             {user.displayName}
-            <img src={triangle} alt="Downward Triangle"  className="h-8"/>
+            <img src={triangle} alt="Downward Triangle" className="h-8" />
           </button>
-          <div className="absolute top-14 left-0 flex justify-center py-2 w-full bg-stone-900 z-20">
-            <button
-              className="py-2 px-8 text-md rounded hover:bg-stone-800 active:bg-stone-700"
-              onClick={signOutUser}
-            >
-              Sign Out
-            </button>
-          </div>
+          {showDropDown && (
+            <div className="absolute top-14 left-0 flex justify-center py-2 w-full bg-stone-900 z-20">
+              <button
+                className="py-2 px-8 text-md rounded hover:bg-stone-800 active:bg-stone-700"
+                onClick={signOutUser}
+              >
+                Sign Out
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <button

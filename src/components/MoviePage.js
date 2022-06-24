@@ -89,13 +89,13 @@ export default function MoviePage({ signInUser, user }) {
     getSimilarMovies();
     getReviews();
 
-    return () => {
-      setMovieDetails(null);
-      setMovieVideos(null);
-      setMovieImages(null);
-      setMovieCast(null);
-      setSimilarMovies(null);
-    };
+    // return () => {
+    //   setMovieDetails(null);
+    //   setMovieVideos(null);
+    //   setMovieImages(null);
+    //   setMovieCast(null);
+    //   setSimilarMovies(null);
+    // };
   }, [movieId]);
 
   const addReview = async () => {
@@ -181,10 +181,18 @@ export default function MoviePage({ signInUser, user }) {
           </section>
         )}
         {movieImages && (
-          <section className="my-16 mx-4 xl:px-64 2xl:px-96">
+          <section className="my-16 mx-4 xl:mx-64 2xl:mx-96 relative">
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               Photos
             </h3>
+            <div className="absolute flex w-full h-full justify-between items-center p-2 z-10">
+              <button className="px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
+                {"<"}
+              </button>
+              <button className="px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
+                {">"}
+              </button>
+            </div>
             <div className="flex overflow-scroll gap-4 my-8">
               {movieImages.backdrops.slice(0, 12).map((image) => (
                 <div className="shrink-0">

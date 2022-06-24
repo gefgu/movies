@@ -15,7 +15,7 @@ export default function NavBar({ signInUser, signOutUser, user }) {
   };
 
   return (
-    <nav className="flex bg-stone-900 text-white px-6 py-1 items-center h-16 gap-2 sm:gap-4 w-full xl:px-64 2xl:px-96">
+    <nav className="flex flex-wrap bg-stone-900 text-white px-6 py-2 items-center min-h-16 gap-2 sm:gap-4 w-full xl:px-64 2xl:px-96 justify-center">
       <Link to="/">
         <h1 className="p-2 text-xl font-bold uppercase">Movies</h1>
       </Link>
@@ -24,7 +24,7 @@ export default function NavBar({ signInUser, signOutUser, user }) {
           ref={searchBar}
           name="search"
           type="text"
-          className="border-2 text-black flex-1 py-1 px-2 hidden sm:block"
+          className="border-2 text-black flex-1 py-1 px-2"
           placeholder="Search Movies"
         />
         <button
@@ -47,7 +47,7 @@ export default function NavBar({ signInUser, signOutUser, user }) {
           </svg>
         </button>
       </form>
-      <div className="border w-px h-4/5"></div>
+      <div className="border w-px h-10 hidden sm:block"></div>
       {user ? (
         <div className="flex items-center relative">
           <button

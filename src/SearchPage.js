@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getTMDBImage } from "./helpers";
 
 export default function SearchPage() {
@@ -16,7 +16,7 @@ export default function SearchPage() {
       )}&page=1&include_adult=false`
     );
     const data = await response.json();
-    const results = data.results.filter((result) => result.poster_path)
+    const results = data.results.filter((result) => result.poster_path);
     console.log(results);
     setSearchResults(results);
   };
@@ -35,12 +35,14 @@ export default function SearchPage() {
       <div className="grid grid-cols-1 gap-16">
         {searchResults &&
           searchResults.map((searchResult) => (
-            <section className="flex gap-8" key={searchResult.id}>
-              <img
-                src={getTMDBImage(searchResult.poster_path)}
-                alt="Movie Poster"
-                className="h-56"
-              />
+            <section className="grid grid-cols-[200px_1fr] gap-8" key={searchResult.id}>
+              <Link to={`../movie/${searchResult.id}`}>
+                <img
+                  src={getTMDBImage(searchResult.poster_path)}
+                  alt="Movie Poster"
+                  className="h-56"
+                />
+              </Link>
 
               <div>
                 <h3 className="text-xl my-2">{searchResult.title}</h3>

@@ -91,13 +91,13 @@ export default function MoviePage({ signInUser, user }) {
     getSimilarMovies();
     getReviews();
 
-    // return () => {
-    //   setMovieDetails(null);
-    //   setMovieVideos(null);
-    //   setMovieImages(null);
-    //   setMovieCast(null);
-    //   setSimilarMovies(null);
-    // };
+    return () => {
+      setMovieDetails(null);
+      setMovieVideos(null);
+      setMovieImages(null);
+      setMovieCast(null);
+      setSimilarMovies(null);
+    };
   }, [movieId]);
 
   const addReview = async () => {

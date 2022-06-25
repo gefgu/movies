@@ -176,9 +176,7 @@ export default function MoviePage({ signInUser, user }) {
                   frameBorder="0"
                   allowFullScreen
                   title="video"
-                  className="flex-shrink-0"
-                  height="400"
-                  width="576"
+                  className="flex-shrink-0 w-full max-w-xl min-h-[360px]"
                   key={video.key}
                 />
               ))}

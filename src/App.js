@@ -12,6 +12,7 @@ import {
   signOut,
 } from "firebase/auth";
 import SearchPage from "./components/SearchPage";
+import PersonPage from "./components/PersonPage";
 
 function App() {
   const app = initializeApp(firebaseConfig);
@@ -52,6 +53,7 @@ function App() {
           element={<MoviePage signInUser={signInUser} user={currentUser} />}
         />
         <Route path="/search/:searchQuery" element={<SearchPage />} />
+        <Route path="/person/:personId" element={<PersonPage />} />
       </Routes>
     </BrowserRouter>
   );

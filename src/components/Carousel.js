@@ -11,7 +11,7 @@ export default function Carousel({ listing, imagesInDisplay }) {
 
     const currentImage = [...carouselSection.current.childNodes].find(
       (element, index) => {
-        return element.width * index + element.width / 2 > scroll;
+        return element.clientWidth * index + element.clientWidth / 2 > scroll;
       }
     );
 

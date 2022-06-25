@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getTMDBImage } from "./helpers";
+import { getTMDBImage } from "../helpers";
 
 export default function SearchPage() {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;

@@ -11,7 +11,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import SearchPage from "./SearchPage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   const app = initializeApp(firebaseConfig);

@@ -11,7 +11,7 @@ export default function NavBar({ signInUser, signOutUser, user }) {
   const search = (e) => {
     e.preventDefault();
     const searchQuery = searchBar.current.value.replaceAll(" ", "+");
-    if (searchQuery > 0) navigate(`search/${searchQuery}`);
+    if (searchQuery.length > 0) navigate(`search/${searchQuery}`);
   };
 
   return (

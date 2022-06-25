@@ -4,13 +4,15 @@ export default function Carousel({ listing, imagesInDisplay }) {
   const [imageInViewByButton, setImageInViewByButton] = useState(0);
   const [imageInViewByScroll, setImageInViewByScroll] = useState(0);
   const carouselSection = useRef(null);
+  const isInitialMount = useRef(true);
 
   const handleScroll = (e) => {
     const scroll = e.target.scrollLeft;
-    console.log(e);
 
     const currentImage = [...carouselSection.current.childNodes].find(
-      (element, index) => element.width * index + element.width / 2 > scroll
+      (element, index) => {
+        return element.width * index + element.width / 2 > scroll;
+      }
     );
 
     const index = [...carouselSection?.current?.childNodes].indexOf(
@@ -23,6 +25,10 @@ export default function Carousel({ listing, imagesInDisplay }) {
   };
 
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     carouselSection?.current?.childNodes[imageInViewByButton].scrollIntoView({
       behavior: "smooth",
       block: "center",

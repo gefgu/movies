@@ -49,7 +49,6 @@ export default function MoviePage({ signInUser, user }) {
       `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${MOVIE_API_KEY}`
     );
     const data = await response.json();
-    console.log(data.cast);
     setMovieCast(data.cast);
   };
 

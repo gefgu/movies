@@ -19,8 +19,16 @@ export default function PersonPage() {
   useEffect(() => {
     getPersonData();
 
-    return () => setPersonData(null);
-  });
+    return () => {
+      setPersonData(null);
+    };
+  }, [personId]);
 
-  return <div>Actor Page - {personId}</div>;
+  return (
+    personData && (
+      <section>
+        <h2>{personData.name}</h2>
+      </section>
+    )
+  );
 }

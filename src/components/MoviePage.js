@@ -164,22 +164,25 @@ export default function MoviePage({ signInUser, user }) {
           </div>
         </section>
         {movieVideos && (
-          <section className="my-16 mx-4 xl:px-64 2xl:px-96">
+          <section className="my-16 mx-4 xl:mx-64 2xl:mx-96 relative">
             <h3 className="text-3xl border-l-4 p-2 border-yellow-400">
               Videos
             </h3>
-            <div className="flex overflow-scroll gap-4 my-8 w-full">
-              {movieVideos.slice(0, 4).map((video) => (
+            <Carousel
+              imagesInDisplay={4}
+              listing={movieVideos.slice(0, 4).map((video) => (
                 <iframe
                   src={`https://www.youtube.com/embed/${video.key}`}
                   frameBorder="0"
                   allowFullScreen
                   title="video"
-                  className="flex-shrink-0 w-full max-w-xl min-h-[360px]"
+                  className="flex-shrink-0"
+                  height="400"
+                  width="576"
                   key={video.key}
                 />
               ))}
-            </div>
+            />
           </section>
         )}
         {movieImages && (

@@ -169,8 +169,8 @@ export default function MoviePage({ signInUser, user }) {
               Videos
             </h3>
             <Carousel
-              imagesInDisplay={4}
-              listing={movieVideos.slice(0, 4).map((video) => (
+              imagesInDisplay={7}
+              listing={movieVideos.slice(0, 7).map((video) => (
                 <iframe
                   src={`https://www.youtube.com/embed/${video.key}`}
                   frameBorder="0"

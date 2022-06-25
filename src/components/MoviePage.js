@@ -1,5 +1,5 @@
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
 import MoviesList from "./MoviesList";
@@ -8,7 +8,6 @@ import ReviewPopup from "./ReviewPopup";
 export default function MoviePage({ signInUser, user }) {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
   const { movieId } = useParams();
-  // 338953 - Fantastic Beasts 3 id
 
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieVideos, setMovieVideos] = useState(null);
@@ -17,7 +16,10 @@ export default function MoviePage({ signInUser, user }) {
   const [similarMovies, setSimilarMovies] = useState(null);
   const [displayReviewPopup, setDisplayReviewPopup] = useState(false);
   const [reviews, setReviews] = useState(null);
-  // const [imageInView, setImageInView] = useState(0);
+  const [imageInView, setImageInView] = useState(0);
+  const imagesSection = useRef(null);
+
+  const imagesInDisplay = 12;
 
   const getMovieDetails = async () => {
     const response = await fetch(
@@ -99,9 +101,9 @@ export default function MoviePage({ signInUser, user }) {
     // };
   }, [movieId]);
 
-  // useEffect(() => {
-
-  // }, [imageInView])
+  useEffect(() => {
+    imagesSection?.current?.childNodes[imageInView].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+  }, [imageInView]);
 
   const addReview = async () => {
     console.log(user);
@@ -190,18 +192,30 @@ export default function MoviePage({ signInUser, user }) {
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               Photos
             </h3>
-            <button className="absolute top-2/4 left-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
+            <button
+              onClick={() => setImageInView(Math.max(imageInView - 1, 0))}
+              className="absolute top-2/4 left-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl"
+            >
               {"<"}
             </button>
-            <button className="absolute top-2/4 right-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
+            <button
+              onClick={() =>
+                setImageInView(Math.min(imageInView + 1, imagesInDisplay - 1))
+              }
+              className="absolute top-2/4 right-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl"
+            >
               {">"}
             </button>
-            <div className="flex overflow-scroll gap-4 my-8">
-              {movieImages.backdrops.slice(0, 12).map((image) => (
+            <div
+              className="flex overflow-scroll gap-4 my-8"
+              ref={imagesSection}
+            >
+              {movieImages.backdrops.slice(0, imagesInDisplay).map((image) => (
                 <img
                   src={getTMDBImage(image.file_path)}
                   alt="Movie"
                   className="h-96 object-cover"
+                  key={image.file_path}
                 />
               ))}
             </div>

@@ -17,6 +17,7 @@ export default function MoviePage({ signInUser, user }) {
   const [similarMovies, setSimilarMovies] = useState(null);
   const [displayReviewPopup, setDisplayReviewPopup] = useState(false);
   const [reviews, setReviews] = useState(null);
+  // const [imageInView, setImageInView] = useState(0);
 
   const getMovieDetails = async () => {
     const response = await fetch(
@@ -97,6 +98,10 @@ export default function MoviePage({ signInUser, user }) {
     //   setSimilarMovies(null);
     // };
   }, [movieId]);
+
+  // useEffect(() => {
+
+  // }, [imageInView])
 
   const addReview = async () => {
     console.log(user);
@@ -185,23 +190,19 @@ export default function MoviePage({ signInUser, user }) {
             <h3 className="text-3xl border-l-4  p-2 border-yellow-400">
               Photos
             </h3>
-            <div className="absolute flex w-full h-full justify-between items-center p-2 z-10">
-              <button className="px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
-                {"<"}
-              </button>
-              <button className="px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
-                {">"}
-              </button>
-            </div>
+            <button className="absolute top-2/4 left-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
+              {"<"}
+            </button>
+            <button className="absolute top-2/4 right-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl">
+              {">"}
+            </button>
             <div className="flex overflow-scroll gap-4 my-8">
               {movieImages.backdrops.slice(0, 12).map((image) => (
-                <div className="shrink-0">
-                  <img
-                    src={getTMDBImage(image.file_path)}
-                    alt="Movie"
-                    className="h-96"
-                  />
-                </div>
+                <img
+                  src={getTMDBImage(image.file_path)}
+                  alt="Movie"
+                  className="h-96 object-cover"
+                />
               ))}
             </div>
           </section>

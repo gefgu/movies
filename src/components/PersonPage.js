@@ -2,6 +2,7 @@ import { compareDesc, format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getTMDBImage } from "../helpers";
+import Carousel from "./Carousel";
 
 export default function PersonPage() {
   const { personId } = useParams();
@@ -40,7 +41,7 @@ export default function PersonPage() {
     );
     const data = await response.json();
     console.log(data.profiles);
-    setPersonCredits(data.profiles);
+    setPersonImages(data.profiles);
   };
 
   useEffect(() => {
@@ -56,22 +57,42 @@ export default function PersonPage() {
   }, [personId]);
 
   return (
-    personData && (
-      <section className="my-8 mx-4 xl:px-64 2xl:px-96 border rounded p-4">
-        <h2 className="text-3xl">{personData.name}</h2>
-        <div className="flex flex-wrap sm:flex-nowrap justify-center gap-8 my-4">
-          <img
-            src={getTMDBImage(personData.profile_path)}
-            alt="Profile"
-            className="h-96"
+    <main>
+      {personData && (
+        <section className="my-8 mx-4 xl:px-64 2xl:px-96 border rounded p-4">
+          <h2 className="text-3xl">{personData.name}</h2>
+          <div className="flex flex-wrap sm:flex-nowrap justify-center gap-8 my-4">
+            <img
+              src={getTMDBImage(personData.profile_path)}
+              alt="Profile"
+              className="h-96"
+            />
+            <p className="text-justify">{personData.biography}</p>
+          </div>
+          <p>
+            <strong className="mr-2">Born:</strong>{" "}
+            {format(new Date(personData.birthday), "MMMM d, y")} in{" "}
+            {personData.place_of_birth}{" "}
+          </p>
+        </section>
+      )}
+      {personImages && (
+        <section className="my-8 mx-4 xl:px-64 2xl:px-96 border rounded p-4 relative">
+          <h2 className="text-3xl">Photos</h2>
+
+          <Carousel
+            imagesInDisplay={personImages.length}
+            listing={personImages.map((image) => (
+              <img
+                src={getTMDBImage(image.file_path)}
+                alt="Movie"
+                className="h-96 object-cover"
+                key={image.file_path}
+              />
+            ))}
           />
-          <p className="text-justify">{personData.biography}</p>
-        </div>
-        <p>
-          <strong className="mr-2">Born:</strong> {format(new Date(personData.birthday), "MMMM d, y")} in{" "}
-          {personData.place_of_birth}{" "}
-        </p>
-      </section>
-    )
+        </section>
+      )}
+    </main>
   );
 }

@@ -28,9 +28,9 @@ export default function PersonPage() {
     const data = await response.json();
     let credits = data.cast;
     credits = credits.filter((credit) => credit.release_date);
-    credits.sort((a, b) => {
-      return compareDesc(new Date(a.release_date), new Date(b.release_date));
-    });
+    // credits.sort((a, b) => {
+    //   return compareDesc(new Date(a.release_date), new Date(b.release_date));
+    // });
     console.log(credits);
     setPersonCredits(credits);
   };

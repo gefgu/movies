@@ -34,7 +34,6 @@ export default function Home({ user, signInUser }) {
         getMovieDetails(review.movie, MOVIE_API_KEY)
       );
       const movies = await Promise.all(reviewMovieFetching);
-      console.log(movies);
       return movies;
     } catch (error) {
       console.error("Error trying to ge reviews", error);

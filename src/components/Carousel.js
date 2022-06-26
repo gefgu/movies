@@ -6,12 +6,15 @@ export default function Carousel({ listing, imagesInDisplay }) {
   const carouselSection = useRef(null);
   const isInitialMount = useRef(true);
 
-  const handleScroll = (e) => {
-    const scroll = e.target.scrollLeft;
+  const handleScroll = () => {
+    const scroll = carouselSection.current.scrollLeft;
+    const containerWidth = carouselSection.current.clientWidth;
 
     const currentImage = [...carouselSection.current.childNodes].find(
       (element, index) => {
-        return element.clientWidth * index + element.clientWidth / 2 > scroll;
+        return (
+          element.clientWidth * (index + 1) > scroll + (containerWidth * 4) / 10
+        );
       }
     );
 
@@ -35,6 +38,10 @@ export default function Carousel({ listing, imagesInDisplay }) {
       inline: "center",
     });
   }, [imageInViewByButton]);
+
+  useEffect(() => {
+    handleScroll();
+  });
 
   return (
     <>

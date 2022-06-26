@@ -7,6 +7,7 @@ export default function PersonPage() {
 
   const [personData, setPersonData] = useState(null);
   const [personCredits, setPersonCredits] = useState(null);
+  const [personImages, setPersonImages] = useState(null);
 
   const getPersonData = async () => {
     const response = await fetch(
@@ -26,13 +27,24 @@ export default function PersonPage() {
     setPersonCredits(data.cast);
   };
 
+  const getPersonImages = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/person/${personId}/images?api_key=${MOVIE_API_KEY}&language=en-US`
+    );
+    const data = await response.json();
+    console.log(data.profiles);
+    setPersonCredits(data.profiles);
+  };
+
   useEffect(() => {
     getPersonData();
     getPersonCredits();
+    getPersonImages();
 
     return () => {
       setPersonData(null);
       setPersonCredits(null);
+      setPersonImages(null);
     };
   }, [personId]);
 

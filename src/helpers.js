@@ -25,9 +25,27 @@ const getMovieDetails = async (movieId, MOVIE_API_KEY) => {
   return data;
 };
 
+const getPopularMovies = async (MOVIE_API_KEY) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
+  );
+  const dataListing = await response.json();
+  return dataListing.results;
+};
+
+const getTopRatedMovies = async (MOVIE_API_KEY) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
+  );
+  const dataListing = await response.json();
+  return dataListing.results;
+};
+
 export {
   getTMDBImage,
   getMoviesPosters,
   convertMinutesIntoHoursAndMinutes,
   getMovieDetails,
+  getPopularMovies,
+  getTopRatedMovies
 };

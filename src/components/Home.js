@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import HeroSection from "./HeroSection";
 import PostersListing from "./PostersListing";
-import { getMovieDetails, getTMDBImage } from "../helpers";
+import {
+  getMovieDetails,
+  getPopularMovies,
+  getTMDBImage,
+  getTopRatedMovies,
+} from "../helpers";
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 
 export default function Home({ user, signInUser }) {
@@ -13,26 +18,9 @@ export default function Home({ user, signInUser }) {
 
   const moviesInDisplay = 6;
 
-  const getPopularMovies = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
-    );
-    const dataListing = await response.json();
-    setPopularMovies(dataListing.results);
-  };
-
-  const getTopRatedMovies = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
-    );
-    const dataListing = await response.json();
-    setTopRatedMovies(dataListing.results);
-  };
-
   const getMoviesOfLatestReviews = async () => {
     try {
       const reviewsQuery = query(collection(getFirestore(), "reviews"));
-
       const reviewsSnapshot = await getDocs(reviewsQuery);
       let newReviews = [];
       reviewsSnapshot.forEach((review) => {
@@ -48,8 +36,8 @@ export default function Home({ user, signInUser }) {
   };
 
   const getAllData = async () => {
-    getPopularMovies();
-    getTopRatedMovies();
+    setPopularMovies(await getPopularMovies(MOVIE_API_KEY));
+    setTopRatedMovies(await getTopRatedMovies(MOVIE_API_KEY));
     setMoviesOfLatestReviews(await getMoviesOfLatestReviews());
   };
 

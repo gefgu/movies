@@ -29,9 +29,7 @@ export default function PersonPage() {
     const data = await response.json();
     let credits = data.cast;
     credits = credits.filter((credit) => credit.release_date);
-    // credits.sort((a, b) => {
-    //   return compareDesc(new Date(a.release_date), new Date(b.release_date));
-    // });
+    credits = credits.filter((credit) => credit.character);
     console.log(credits);
     setPersonCredits(credits);
   };
@@ -103,6 +101,29 @@ export default function PersonPage() {
               .sort((a, b) => b.popularity - a.popularity)
               .slice(0, 4)}
           />
+        </section>
+      )}
+
+      {personCredits && (
+        <section className="my-8 mx-4 xl:mx-64 2xl:mx-96 border rounded p-4 relative">
+          <h2 className="text-3xl">Filmography</h2>
+          <div className="flex flex-col gap-4 my-4">
+            {personCredits
+              .sort((a, b) =>
+                compareDesc(new Date(a.release_date), new Date(b.release_date))
+              )
+              .map((credit) => {
+                return (
+                  <article>
+                    <div className="flex justify-between">
+                      <h3 className="text-xl text-blue-700">{credit.title}</h3>
+                      <p>{credit.release_date.split("-")[0]}</p>
+                    </div>
+                    <p className="text-sm">{credit.character}</p>
+                  </article>
+                );
+              })}
+          </div>
         </section>
       )}
     </main>

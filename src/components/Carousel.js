@@ -6,7 +6,7 @@ export default function Carousel({ listing, imagesInDisplay }) {
   const carouselSection = useRef(null);
   const isInitialMount = useRef(true);
 
-  const handleScroll = () => {
+  const getImageInViewByScroll = () => {
     const scroll = carouselSection.current.scrollLeft;
     const containerWidth = carouselSection.current.clientWidth;
 
@@ -39,33 +39,31 @@ export default function Carousel({ listing, imagesInDisplay }) {
     });
   }, [imageInViewByButton]);
 
-  useEffect(() => {
-    handleScroll();
-  });
-
   return (
     <>
       <button
-        onClick={() =>
-          setImageInViewByButton(Math.max(imageInViewByScroll - 1, 0))
-        }
+        onClick={() => {
+          getImageInViewByScroll();
+          setImageInViewByButton(Math.max(imageInViewByScroll - 1, 0));
+        }}
         className="absolute top-2/4 left-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl"
       >
         {"<"}
       </button>
       <button
-        onClick={() =>
+        onClick={() => {
+          getImageInViewByScroll();
           setImageInViewByButton(
             Math.min(imageInViewByScroll + 1, imagesInDisplay - 1)
           )
-        }
+        }}
         className="absolute top-2/4 right-2 px-4 py-2 bg-stone-900/80 font-bold text-white text-5xl"
       >
         {">"}
       </button>
       <div
         className="flex overflow-scroll gap-4 my-8"
-        onScroll={handleScroll}
+        onScroll={getImageInViewByScroll}
         ref={carouselSection}
       >
         {listing}

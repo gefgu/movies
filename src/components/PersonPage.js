@@ -59,7 +59,7 @@ export default function PersonPage() {
   return (
     <main>
       {personData && (
-        <section className="my-8 mx-4 xl:px-64 2xl:px-96 border rounded p-4">
+        <section className="my-8 mx-4 xl:mx-64 2xl:mx-96 border rounded p-4">
           <h2 className="text-3xl">{personData.name}</h2>
           <div className="flex flex-wrap sm:flex-nowrap justify-center gap-8 my-4">
             <img
@@ -77,7 +77,7 @@ export default function PersonPage() {
         </section>
       )}
       {personImages && (
-        <section className="my-8 mx-4 xl:px-64 2xl:px-96 border rounded p-4 relative">
+        <section className="my-8 mx-4 xl:mx-64 2xl:mx-96 border rounded p-4 relative">
           <h2 className="text-3xl">Photos</h2>
 
           <Carousel

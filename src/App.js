@@ -22,7 +22,6 @@ function App() {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
     const auth = getAuth();
-    console.log(auth);
     setCurrentUser(auth.currentUser);
   };
 
@@ -32,9 +31,9 @@ function App() {
     setCurrentUser(auth.currentUser);
   };
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  // useEffect(() => {
+  //   console.log(currentUser);
+  // }, [currentUser]);
 
   return (
     <BrowserRouter>

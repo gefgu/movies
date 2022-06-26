@@ -37,7 +37,6 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
         movie: movieDetails.id,
       };
 
-      console.log(review);
       saveReview(review);
       removePopup();
     }

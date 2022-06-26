@@ -101,7 +101,6 @@ export default function MoviePage({ signInUser, user }) {
   }, [movieId]);
 
   const addReview = async () => {
-    console.log(user);
     if (!user) {
       await signInUser();
     }

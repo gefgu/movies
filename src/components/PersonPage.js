@@ -18,7 +18,6 @@ export default function PersonPage() {
       `https://api.themoviedb.org/3/person/${personId}?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    console.log(data);
     setPersonData(data);
   };
 
@@ -30,7 +29,6 @@ export default function PersonPage() {
     let credits = data.cast;
     credits = credits.filter((credit) => credit.release_date);
     credits = credits.filter((credit) => credit.character);
-    console.log(credits);
     setPersonCredits(credits);
   };
 
@@ -39,7 +37,6 @@ export default function PersonPage() {
       `https://api.themoviedb.org/3/person/${personId}/images?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    console.log(data.profiles);
     setPersonImages(data.profiles);
   };
 

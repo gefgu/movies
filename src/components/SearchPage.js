@@ -17,7 +17,6 @@ export default function SearchPage() {
     );
     const data = await response.json();
     const results = data.results.filter((result) => result.poster_path);
-    console.log(results);
     if (results.length > 0) setSearchResults(results);
   };
 

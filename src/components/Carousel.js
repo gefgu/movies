@@ -32,7 +32,7 @@ export default function Carousel({ listing, imagesInDisplay }) {
       isInitialMount.current = false;
       return;
     }
-    carouselSection?.current?.childNodes[imageInViewByButton].scrollIntoView({
+    carouselSection?.current?.childNodes[imageInViewByButton]?.scrollIntoView({
       behavior: "smooth",
       block: "center",
       inline: "center",

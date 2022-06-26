@@ -8,6 +8,7 @@ import {
   getTopRatedMovies,
 } from "../helpers";
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
+import { compareDesc } from "date-fns";
 
 export default function Home({ user, signInUser }) {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -22,12 +23,17 @@ export default function Home({ user, signInUser }) {
     try {
       const reviewsQuery = query(collection(getFirestore(), "reviews"));
       const reviewsSnapshot = await getDocs(reviewsQuery);
-      let newReviews = [];
+      let reviews = [];
       reviewsSnapshot.forEach((review) => {
-        const movieId = review.data().movie;
-        newReviews.push(getMovieDetails(movieId, MOVIE_API_KEY));
+        reviews.push(review.data());
       });
-      const movies = await Promise.all(newReviews);
+      reviews = reviews.sort((a, b) =>
+        compareDesc(new Date(a.date), new Date(b.date))
+      );
+      const reviewMovieFetching = reviews.map((review) =>
+        getMovieDetails(review.movie, MOVIE_API_KEY)
+      );
+      const movies = await Promise.all(reviewMovieFetching);
       console.log(movies);
       return movies;
     } catch (error) {

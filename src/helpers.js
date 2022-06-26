@@ -17,28 +17,60 @@ const convertMinutesIntoHoursAndMinutes = (minutes) => {
   return { hours: hours, minutes: remainingMinutes };
 };
 
-const getMovieDetails = async (movieId, MOVIE_API_KEY) => {
+const getMovieDetails = async (movieId, apiKey) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${MOVIE_API_KEY}&language=en-US`
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
   );
   const data = await response.json();
   return data;
 };
 
-const getPopularMovies = async (MOVIE_API_KEY) => {
+const getPopularMovies = async (apiKey) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
   );
   const dataListing = await response.json();
   return dataListing.results;
 };
 
-const getTopRatedMovies = async (MOVIE_API_KEY) => {
+const getTopRatedMovies = async (apiKey) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`
   );
   const dataListing = await response.json();
   return dataListing.results;
+};
+
+const getMovieVideos = async (movieId, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`
+  );
+  const data = await response.json();
+  if (data.results.length > 0) return data.results;
+};
+
+const getMovieImages = async (movieId, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${apiKey}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+const getMovieCast = async (movieId, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`
+  );
+  const data = await response.json();
+  return data.cast;
+};
+
+const getSimilarMovies = async (movieId, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}&language=en-US&page=1`
+  );
+  const data = await response.json();
+  return data.results;
 };
 
 export {
@@ -47,5 +79,9 @@ export {
   convertMinutesIntoHoursAndMinutes,
   getMovieDetails,
   getPopularMovies,
-  getTopRatedMovies
+  getTopRatedMovies,
+  getMovieVideos,
+  getMovieImages,
+  getMovieCast,
+  getSimilarMovies,
 };

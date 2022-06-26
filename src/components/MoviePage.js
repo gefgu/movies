@@ -1,7 +1,15 @@
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { convertMinutesIntoHoursAndMinutes, getMovieDetails, getTMDBImage } from "../helpers";
+import {
+  convertMinutesIntoHoursAndMinutes,
+  getMovieCast,
+  getMovieDetails,
+  getMovieImages,
+  getMovieVideos,
+  getSimilarMovies,
+  getTMDBImage,
+} from "../helpers";
 import Carousel from "./Carousel";
 import MoviesList from "./MoviesList";
 import ReviewPopup from "./ReviewPopup";
@@ -19,38 +27,6 @@ export default function MoviePage({ signInUser, user }) {
   const [reviews, setReviews] = useState(null);
 
   const imagesInDisplay = 12;
-
-  const getMovieVideos = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${MOVIE_API_KEY}&language=en-US`
-    );
-    const data = await response.json();
-    if (data.results.length > 0) setMovieVideos(data.results);
-  };
-
-  const getMovieImages = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${MOVIE_API_KEY}`
-    );
-    const data = await response.json();
-    setMovieImages(data);
-  };
-
-  const getMovieCast = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${MOVIE_API_KEY}`
-    );
-    const data = await response.json();
-    setMovieCast(data.cast);
-  };
-
-  const getSimilarMovies = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${MOVIE_API_KEY}&language=en-US&page=1`
-    );
-    const data = await response.json();
-    setSimilarMovies(data.results.slice(0, 6));
-  };
 
   const getMovieTrailers = (movieVideos) => {
     return movieVideos.filter(
@@ -76,12 +52,16 @@ export default function MoviePage({ signInUser, user }) {
   };
 
   useEffect(() => {
-    setMovieDetails(getMovieDetails(movieId, MOVIE_API_KEY));
-    getMovieVideos();
-    getMovieImages();
-    getMovieCast();
-    getSimilarMovies();
-    getReviews();
+    getMovieDetails(movieId, MOVIE_API_KEY).then((data) =>
+      setMovieDetails(data)
+    );
+    getMovieVideos(movieId, MOVIE_API_KEY).then((data) => setMovieVideos(data));
+    getMovieImages(movieId, MOVIE_API_KEY).then((data) => setMovieImages(data));
+    getMovieCast(movieId, MOVIE_API_KEY).then((data) => setMovieCast(data));
+    getSimilarMovies(movieId, MOVIE_API_KEY).then((data) =>
+      setSimilarMovies(data.slice(0, 6))
+    );
+    getReviews(movieId, MOVIE_API_KEY);
 
     return () => {
       setMovieDetails(null);

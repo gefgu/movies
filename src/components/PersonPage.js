@@ -1,6 +1,6 @@
 import { compareDesc, format } from "date-fns";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getTMDBImage } from "../helpers";
 import Carousel from "./Carousel";
 import MoviesList from "./MoviesList";
@@ -116,7 +116,11 @@ export default function PersonPage() {
                 return (
                   <article>
                     <div className="flex justify-between">
-                      <h3 className="text-xl text-blue-700">{credit.title}</h3>
+                      <Link to={`../movie/${credit.id}`} className="text-blue-700 hover:text-blue-800 active:text-blue-900">
+                        <h3 className="text-xl">
+                          {credit.title}
+                        </h3>
+                      </Link>
                       <p>{credit.release_date.split("-")[0]}</p>
                     </div>
                     <p className="text-sm">{credit.character}</p>

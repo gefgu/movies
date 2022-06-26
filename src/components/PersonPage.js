@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getTMDBImage } from "../helpers";
 import Carousel from "./Carousel";
+import MoviesList from "./MoviesList";
 
 export default function PersonPage() {
   const { personId } = useParams();
@@ -90,6 +91,17 @@ export default function PersonPage() {
                 key={image.file_path}
               />
             ))}
+          />
+        </section>
+      )}
+      {personCredits && (
+        <section className="my-8 mx-4 xl:mx-64 2xl:mx-96 border rounded p-4 relative">
+          <h2 className="text-3xl">Know For</h2>
+
+          <MoviesList
+            movies={personCredits
+              .sort((a, b) => b.popularity - a.popularity)
+              .slice(0, 4)}
           />
         </section>
       )}

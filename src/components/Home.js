@@ -41,14 +41,14 @@ export default function Home({ user, signInUser }) {
       });
       const movies = await Promise.all(newReviews);
       console.log(movies);
-      setMoviesOfLatestReviews(movies);
+      return movies;
     } catch (error) {
       console.error("Error trying to ge reviews", error);
     }
   };
 
   useEffect(() => {
-    getPopularMovies();
+    setMoviesOfLatestReviews(getPopularMovies());
     getTopRatedMovies();
     getMoviesOfLatestReviews();
 

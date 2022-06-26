@@ -1,6 +1,6 @@
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
 import Carousel from "./Carousel";
 import MoviesList from "./MoviesList";
@@ -213,13 +213,20 @@ export default function MoviePage({ signInUser, user }) {
                 if (!person.profile_path) return "";
                 return (
                   <section className="flex items-center">
-                    <img
-                      src={getTMDBImage(person.profile_path)}
-                      alt="profile"
-                      className="h-32 w-28 object-cover rounded-full"
-                    />
+                    <Link to={`../person/${person.id}`}>
+                      <img
+                        src={getTMDBImage(person.profile_path)}
+                        alt="profile"
+                        className="h-32 w-28 object-cover rounded-full"
+                      />
+                    </Link>
+
                     <div className="flex flex-col mx-4">
-                      <h4 className="text-2xl my-2 font-bold">{person.name}</h4>
+                      <Link to={`../person/${person.id}`}>
+                        <h4 className="text-2xl my-2 font-bold">
+                          {person.name}
+                        </h4>
+                      </Link>
                       <h5 className="text-gray-800">{person.character}</h5>
                     </div>
                   </section>

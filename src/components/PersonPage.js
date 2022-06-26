@@ -1,3 +1,4 @@
+import { compareDesc } from "date-fns";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -23,8 +24,13 @@ export default function PersonPage() {
       `https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${MOVIE_API_KEY}&language=en-US`
     );
     const data = await response.json();
-    console.log(data.cast);
-    setPersonCredits(data.cast);
+    let credits = data.cast;
+    credits = credits.filter((credit) => credit.release_date);
+    credits.sort((a, b) => {
+      return compareDesc(new Date(a.release_date), new Date(b.release_date));
+    });
+    console.log(credits);
+    setPersonCredits(credits);
   };
 
   const getPersonImages = async () => {

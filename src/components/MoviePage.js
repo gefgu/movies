@@ -1,7 +1,7 @@
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { convertMinutesIntoHoursAndMinutes, getTMDBImage } from "../helpers";
+import { convertMinutesIntoHoursAndMinutes, getMovieDetails, getTMDBImage } from "../helpers";
 import Carousel from "./Carousel";
 import MoviesList from "./MoviesList";
 import ReviewPopup from "./ReviewPopup";
@@ -19,14 +19,6 @@ export default function MoviePage({ signInUser, user }) {
   const [reviews, setReviews] = useState(null);
 
   const imagesInDisplay = 12;
-
-  const getMovieDetails = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${MOVIE_API_KEY}&language=en-US`
-    );
-    const data = await response.json();
-    setMovieDetails(data);
-  };
 
   const getMovieVideos = async () => {
     const response = await fetch(
@@ -84,7 +76,7 @@ export default function MoviePage({ signInUser, user }) {
   };
 
   useEffect(() => {
-    getMovieDetails();
+    setMovieDetails(getMovieDetails(movieId, MOVIE_API_KEY));
     getMovieVideos();
     getMovieImages();
     getMovieCast();

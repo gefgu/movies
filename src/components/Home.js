@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import HeroSection from "./HeroSection";
 import PostersListing from "./PostersListing";
-import { getTMDBImage } from "../helpers";
+import { getMovieDetails, getTMDBImage } from "../helpers";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 
 export default function Home({ user, signInUser }) {
   const MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
   const [popularMovies, setPopularMovies] = useState(null);
   const [topRatedMovies, setTopRatedMovies] = useState(null);
+  const [MoviesOfLatestReviews, setMoviesOfLatestReviews] = useState(null);
 
   const moviesInDisplay = 6;
 
@@ -27,9 +29,34 @@ export default function Home({ user, signInUser }) {
     setTopRatedMovies(dataListing.results);
   };
 
+  const getMoviesOfLatestReviews = async () => {
+    try {
+      const reviewsQuery = query(collection(getFirestore(), "reviews"));
+
+      const reviewsSnapshot = await getDocs(reviewsQuery);
+      let newReviews = [];
+      reviewsSnapshot.forEach((review) => {
+        const movieId = review.data().movie;
+        newReviews.push(getMovieDetails(movieId, MOVIE_API_KEY));
+      });
+      const movies = await Promise.all(newReviews);
+      console.log(movies);
+      setMoviesOfLatestReviews(movies);
+    } catch (error) {
+      console.error("Error trying to ge reviews", error);
+    }
+  };
+
   useEffect(() => {
     getPopularMovies();
     getTopRatedMovies();
+    getMoviesOfLatestReviews();
+
+    return () => {
+      setPopularMovies(null);
+      setTopRatedMovies(null);
+      setMoviesOfLatestReviews(null);
+    };
   }, []);
 
   return (

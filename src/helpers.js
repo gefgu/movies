@@ -17,4 +17,18 @@ const convertMinutesIntoHoursAndMinutes = (minutes) => {
   return { hours: hours, minutes: remainingMinutes };
 };
 
-export { getTMDBImage, getMoviesPosters, convertMinutesIntoHoursAndMinutes };
+const getMovieDetails = async (movieId, MOVIE_API_KEY) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${MOVIE_API_KEY}&language=en-US`
+  );
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
+
+export {
+  getTMDBImage,
+  getMoviesPosters,
+  convertMinutesIntoHoursAndMinutes,
+  getMovieDetails,
+};

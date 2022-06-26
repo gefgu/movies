@@ -35,14 +35,10 @@ export default function Home({ user, signInUser }) {
     }
   };
 
-  const getAllData = async () => {
-    setPopularMovies(await getPopularMovies(MOVIE_API_KEY));
-    setTopRatedMovies(await getTopRatedMovies(MOVIE_API_KEY));
-    setMoviesOfLatestReviews(await getMoviesOfLatestReviews());
-  };
-
   useEffect(() => {
-    getAllData();
+    getPopularMovies(MOVIE_API_KEY).then((data) => setPopularMovies(data));
+    getTopRatedMovies(MOVIE_API_KEY).then((data) => setTopRatedMovies(data));
+    getMoviesOfLatestReviews().then((data) => setMoviesOfLatestReviews(data));
 
     return () => {
       setPopularMovies(null);

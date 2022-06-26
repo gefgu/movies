@@ -9,7 +9,7 @@ export default function Home({ user, signInUser }) {
 
   const [popularMovies, setPopularMovies] = useState(null);
   const [topRatedMovies, setTopRatedMovies] = useState(null);
-  const [MoviesOfLatestReviews, setMoviesOfLatestReviews] = useState(null);
+  const [moviesOfLatestReviews, setMoviesOfLatestReviews] = useState(null);
 
   const moviesInDisplay = 6;
 
@@ -47,10 +47,14 @@ export default function Home({ user, signInUser }) {
     }
   };
 
-  useEffect(() => {
-    setMoviesOfLatestReviews(getPopularMovies());
+  const getAllData = async () => {
+    getPopularMovies();
     getTopRatedMovies();
-    getMoviesOfLatestReviews();
+    setMoviesOfLatestReviews(await getMoviesOfLatestReviews());
+  };
+
+  useEffect(() => {
+    getAllData();
 
     return () => {
       setPopularMovies(null);
@@ -79,6 +83,12 @@ export default function Home({ user, signInUser }) {
           <PostersListing
             listingTitle="Top Rated Movies"
             movies={topRatedMovies.slice(0, moviesInDisplay)}
+          />
+        )}
+        {moviesOfLatestReviews && (
+          <PostersListing
+            listingTitle="Last Reviewed Movies"
+            movies={moviesOfLatestReviews.slice(0, moviesInDisplay)}
           />
         )}
       </div>

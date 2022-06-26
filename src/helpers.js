@@ -22,7 +22,6 @@ const getMovieDetails = async (movieId, MOVIE_API_KEY) => {
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=${MOVIE_API_KEY}&language=en-US`
   );
   const data = await response.json();
-  console.log(data);
   return data;
 };
 

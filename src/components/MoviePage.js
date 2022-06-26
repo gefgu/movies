@@ -211,7 +211,7 @@ export default function MoviePage({ signInUser, user }) {
               {movieCast.slice(0, 14).map((person) => {
                 if (!person.profile_path) return "";
                 return (
-                  <section className="flex items-center">
+                  <section className="flex items-center" key={person.id}>
                     <Link to={`../person/${person.id}`}>
                       <img
                         src={getTMDBImage(person.profile_path)}
@@ -255,9 +255,12 @@ export default function MoviePage({ signInUser, user }) {
                 + Review
               </button>
             </div>
-            {reviews.map((review) => {
+            {reviews.map((review, index) => {
               return (
-                <section className="my-6 rounded-lg p-4 shadow-md border">
+                <section
+                  className="my-6 rounded-lg p-4 shadow-md border"
+                  key={review.author + index}
+                >
                   <h4 className="text-xl font-bold my-4">{review.title}</h4>
                   <div className="my-4">⭐ {review.rating}/10</div>
                   <p className="my-4 text-justify">{review.content}</p>

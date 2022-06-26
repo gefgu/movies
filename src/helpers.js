@@ -73,6 +73,33 @@ const getSimilarMovies = async (movieId, apiKey) => {
   return data.results;
 };
 
+const getPersonData = async (personId, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/person/${personId}?api_key=${apiKey}&language=en-US`
+  );
+  const data = await response.json();
+  return data;
+};
+
+const getPersonCredits = async (personId, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${apiKey}&language=en-US`
+  );
+  const data = await response.json();
+  let credits = data.cast;
+  credits = credits.filter((credit) => credit.release_date);
+  credits = credits.filter((credit) => credit.character);
+  return credits;
+};
+
+const getPersonImages = async (personId, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/person/${personId}/images?api_key=${apiKey}&language=en-US`
+  );
+  const data = await response.json();
+  return data.profiles;
+};
+
 export {
   getTMDBImage,
   getMoviesPosters,
@@ -84,4 +111,7 @@ export {
   getMovieImages,
   getMovieCast,
   getSimilarMovies,
+  getPersonData,
+  getPersonCredits,
+  getPersonImages,
 };

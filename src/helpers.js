@@ -100,6 +100,18 @@ const getPersonImages = async (personId, apiKey) => {
   return data.profiles;
 };
 
+const getSearchResults = async (query, apiKey) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query.replaceAll(
+      " ",
+      "%20"
+    )}&page=1&include_adult=false`
+  );
+  const data = await response.json();
+  const results = data.results.filter((result) => result.poster_path);
+  if (results.length > 0) return results;
+};
+
 export {
   getTMDBImage,
   getMoviesPosters,
@@ -114,4 +126,5 @@ export {
   getPersonData,
   getPersonCredits,
   getPersonImages,
+  getSearchResults,
 };

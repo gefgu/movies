@@ -44,23 +44,23 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
 
   return (
     <div className="bg-stone-100/50 fixed z-50 top-0 left-0 flex justify-center items-center w-full h-full overflow-scroll">
-      <section className="bg-stone-900 max-w-5xl py-4 px-8 text-white flex-1">
+      <section className="bg-stone-900 max-w-5xl py-2 px-8 text-white flex-1">
         <div className="flex border-b-2 my-6 items-center">
           <img
             src={getTMDBImage(movieDetails.poster_path)}
             alt="Movie Poster"
-            className="h-36"
+            className="h-32"
           />
           <div className="px-4 flex flex-col">
-            <h3 className="text-xl font-bold  mb-2">
+            <h3 className="text-xl font-bold mb-1">
               {movieDetails.original_title}
             </h3>
-            <hr className="mb-8" />
-            <h4 className="text-3xl mt-auto">Add a Review</h4>
+            <hr/>
+            <h4 className="text-3xl mt-8">Add a Review</h4>
           </div>
         </div>
         <form ref={formRef}>
-          <section className="my-6 flex flex-col gap-6">
+          <section className="my-6 flex flex-col gap-4">
             <h5 className="text-xl">Your Rating</h5>
             <div className="bg-white flex flex-wrap items-center justify-center sm:justify-start gap-4 p-2">
               <div className="flex flex-wrap">
@@ -76,7 +76,7 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
                     <img
                       src={source}
                       alt="star"
-                      className="w-12"
+                      className="w-8"
                       onClick={() => addRating(value + 1)}
                       onMouseEnter={() => setDisplayRating(value + 1)}
                       onMouseLeave={() => setDisplayRating(null)}
@@ -89,7 +89,7 @@ export default function ReviewPopup({ movieDetails, removePopup, user }) {
               </span>
             </div>
           </section>
-          <section className="my-6 flex flex-col gap-6">
+          <section className="my-6 flex flex-col gap-4">
             <h5 className="text-xl">Your Review</h5>
             <input
               className="text-black p-2 w-full"

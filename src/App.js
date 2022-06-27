@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import SearchPage from "./components/SearchPage";
 import PersonPage from "./components/PersonPage";
+import Footer from "./components/Footer";
 
 function App() {
   const app = initializeApp(firebaseConfig);
@@ -30,7 +31,6 @@ function App() {
     const auth = getAuth();
     setCurrentUser(auth.currentUser);
   };
-
 
   return (
     <BrowserRouter>
@@ -51,6 +51,7 @@ function App() {
         <Route path="/search/:searchQuery" element={<SearchPage />} />
         <Route path="/person/:personId" element={<PersonPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
